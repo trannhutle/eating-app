@@ -1,0 +1,213 @@
+@import url("https://fonts.googleapis.com/css?family=Vollkorn:400,700&display=swap");
+
+@import "./config.scss";
+body {
+  font: {
+    family: $vollkorn;
+    size: 1rem;
+    weight: 400;
+  }
+  color: $color-black;
+  background-color: $color-light-brow;
+}
+
+// Start layout
+.wrapper {
+  display: grid;
+  grid-template:
+    "sider header" auto
+    "sider content" auto
+    / 1fr 3fr;
+}
+
+.sider {
+  grid-area: sider;
+  align-self: start;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+.header {
+  grid-area: header;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: $color-light-brow;
+}
+.content {
+  grid-area: content;
+  overflow: auto;
+}
+.logo {
+  font-size: $fs-logo;
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+// End layout
+
+.nav-text {
+  text-transform: uppercase;
+  font-weight: $fw-bold;
+  font-size: $fs-h4;
+  &.title {
+    font-size: 0.5rem;
+    height: 25px;
+  }
+}
+
+.filter {
+  text-transform: uppercase;
+  margin: 0 5px;
+  padding: 0 5px;
+  font-size: $fs-h5;
+
+  &.active {
+    border: 1.3px solid $color-grey;
+    border-radius: 3px;
+    font-weight: bolder;
+  }
+}
+.btn-view-card {
+  position: relative;
+  padding: 0.5em 1em;
+  height: 100%;
+  text-transform: uppercase;
+  float: right;
+  font-weight: $fw-bold;
+  background-color: $color-dark-brow;
+  color: $color-white;
+  .count {
+    margin-left: 10px;
+    border-radius: 50%;
+    font-size: $fs-h4;
+    color: $color-dark-brow;
+    background-color: $color-yellow;
+    width: 1.5em;
+    height: 1.5em;
+  }
+}
+.category {
+  font-size: $fs-h1;
+  text-transform: capitalize;
+  font-weight: $fw-bold;
+  color: $color-black;
+}
+
+.container {
+  display: flex;
+  flex-flow: wrap;
+  align-items: stretch;
+  .card {
+    display: flex;
+    flex-flow: column;
+  }
+}
+
+.detail-img {
+  border-radius: 0 50% 50% 0;
+  margin: 0 auto;
+  width: auto;
+  height: auto;
+  max-height: 100%;
+  max-width: 100%;
+}
+.size-list {
+  .size {
+    background: $color-light-grey;
+    padding: 0.5em 1em;
+    margin: 0 1px;
+    .text {
+      text-transform: uppercase;
+      font-size: $fs-h4;
+      font-weight: 900;
+    }
+    .amount {
+      margin-left: 0.5em;
+      font-size: $fs-h4;
+      color: $color-grey;
+    }
+    &.active {
+      background-color: $color-dark-brow;
+      color: $color-white;
+      .amount {
+        color: $color-yellow;
+      }
+    }
+  }
+
+  :first-child {
+    border-radius: 20px 0 0 20px;
+  }
+  :last-child {
+    border-radius: 0 20px 20px 0;
+  }
+}
+.topping-list {
+  .topping {
+  }
+}
+
+[type="checkbox"] {
+  opacity: 0;
+  position: absolute;
+}
+
+.topping label {
+  display: flex-inline;
+  align-items: center;
+  position: relative;
+}
+
+.custom-checkbox {
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 25px;
+  text-transform: uppercase;
+  font-weight: $fw-bold;
+  padding: 0.5em 1em;
+  margin: 0 1px;
+}
+.topping:hover .custom-checkbox,
+[type="checkbox"]:focus + label .custom-checkbox {
+  background: $color-dark-brow;
+  color: $color-white;
+}
+
+[type="checkbox"]:checked + label .custom-checkbox {
+  background: $color-dark-brow;
+  color: $color-white;
+}
+.topping::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: -0.5em;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.1;
+}
+[type="checkbox"]:not(:checked):not(:hover) + label .custom-checkbox {
+  background-color: $color-light-grey;
+  color: $color-dark-brow;
+}
+
+// .topping label::after {
+//   content: "";
+//   position: absolute;
+//   left: 0;
+//   right: 0;
+//   left: 1.5em;
+//   top: 50%;
+//   height: 3px;
+//   background: currentColor;
+//   transform: scaleX(0);
+//   transform-origin: right;
+//   transition: transform 150ms ease-in-out;
+//   background-color: #f6f6f6;
+// }
+// [type="checkbox"]:checked + label::after {
+//   transform: scaleX(1);
+//   transform-origin: left;
+// }

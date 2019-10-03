@@ -1,0 +1,51 @@
+@import "./config.scss";
+
+.ant-layout-sider {
+  background: $color-white;
+}
+.ant-layout-header {
+  background-color: $color-light-brow;
+  padding: 0 1em;
+  height: unset;
+  line-height: unset;
+}
+.ant-layout-content {
+  background-color: $color-light-brow;
+}
+
+.ant-card-body {
+  text-align: center;
+  .price {
+    font-size: 1rem;
+  }
+  .name {
+    font-size: 1rem;
+    font-weight: 900;
+  }
+  .desc {
+    font-size: $fs-h5;
+  }
+}
+.ant-card-cover {
+  position: relative;
+  text-align: center;
+  height: 7em;
+  img {
+    border-radius: 50%;
+    margin: 0 auto;
+    width: auto;
+    height: auto;
+    max-height: 100%;
+    max-width: 100%;
+  }
+  button {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    left: 50%;
+  }
+}
+.ant-menu {
+  border: none;
+  background: none;
+}
