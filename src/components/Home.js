@@ -1,6 +1,6 @@
 import React from "react";
 import { Menu, Icon, Row, Col } from "antd";
-import { ViewCardBtn } from "./Buttons";
+import { ViewCardBtn } from "./buttons/Buttons";
 import CardList from "./CardList";
 
 function Home() {

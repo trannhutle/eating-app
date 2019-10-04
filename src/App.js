@@ -1,13 +1,9 @@
 import React from "react";
-import { Menu, Icon, Row, Col } from "antd";
-import { ViewCardBtn } from "./components/Buttons";
-import CardList from "./components/CardList";
-import Home from "./components/Home";
-import Detail from "./components/Detail";
+import FoodDetailPage from "./components/FoodDetailPage";
 
 function App() {
   // return <Home />;
-  return <Detail />;
+  return <FoodDetailPage />;
 }
 
 export default App;
