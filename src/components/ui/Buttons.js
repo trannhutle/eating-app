@@ -7,9 +7,13 @@ import "./button.scss";
 const INCREASE = "INCREASE";
 const DECREASE = "DECREASE";
 
-export const ViewCardBtn = ({ props }) => {
+export const ViewCardBtn = props => {
+  const handleClick = (e) => {
+    console.log("calll this function");
+    props.onClick(e);
+  };
   return (
-    <Button className="btn-view-card">
+    <Button className="btn-view-card" onClick={handleClick}>
       <Icon type="gift" />
       Order Status
       <span className="count">50</span>
@@ -20,7 +24,9 @@ export const ViewCardBtn = ({ props }) => {
 export const OrderBtn = ({ props }) => {
   return <button className="btn btn-order">Place Order</button>;
 };
-
+export const CloseTableBtn = ({ props }) => {
+  return <button className="btn btn-order">Close Table</button>;
+};
 export const SpinBox = props => {
   const handleClick = e => {
     const operator = e.target.dataset.name;
