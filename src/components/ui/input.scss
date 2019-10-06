@@ -74,7 +74,29 @@
   }
 }
 
-
 .content-right {
   text-align: right;
+}
+.cc {
+  .code-input {
+    font-size: 1.5em;
+    border: none !important;
+    background: none !important;
+    :focus {
+      border: none !important;
+    }
+
+    &::placeholder {
+      color: $color-grey;
+      font-size: 2em;
+      line-height: 25px;
+    }
+  }
+  .text-input {
+    font-size: 1.5em;
+    color: $color-dark-brow;
+    border: none !important;
+    background-color: $color-light-grey;
+    text-transform: uppercase;
+  }
 }

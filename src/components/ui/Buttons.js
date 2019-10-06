@@ -8,7 +8,7 @@ const INCREASE = "INCREASE";
 const DECREASE = "DECREASE";
 
 export const ViewCardBtn = props => {
-  const handleClick = (e) => {
+  const handleClick = e => {
     console.log("calll this function");
     props.onClick(e);
   };
@@ -25,7 +25,10 @@ export const OrderBtn = ({ props }) => {
   return <button className="btn btn-order">Place Order</button>;
 };
 export const CloseTableBtn = ({ props }) => {
-  return <button className="btn btn-order">Close Table</button>;
+  return <button className="btn btn-order">Start to place order</button>;
+};
+export const PayNowBtn = ({ props }) => {
+  return <button className="btn btn-order">Pay Now</button>;
 };
 export const SpinBox = props => {
   const handleClick = e => {

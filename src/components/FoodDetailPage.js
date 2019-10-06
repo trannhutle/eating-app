@@ -33,7 +33,11 @@ class FoodDetailPage extends Component {
           </Col>
         </Row>
         <Detail />
-        <Drawer width={"20em"} closable={false} visible={this.state.visible}>
+        <Drawer
+          width={"20em"}
+          closable={false}
+          visible={this.state.visible}
+        >
           <OrderCart onClick={this.closeCart} />
         </Drawer>
       </div>

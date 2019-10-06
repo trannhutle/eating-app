@@ -4,16 +4,19 @@ import { CloseTableBtn } from "./ui/Buttons";
 const Item = ({ item }) => {
   return (
     <Row className="item" type="flex">
-      <Col span={6}>
+      <Col span={4}>
         <img src="//static.vietnammm.com/images/restaurants/vn/5QPOR5N/products/lasagna-alla-bolognese.png" />
       </Col>
-      <Col span={18} className="name-qty-grp">
+      <Col span={4} className="txt-center">
+        <span className="qty">{item.qty}x</span>
+      </Col>
+      <Col span={16} className="name-qty-grp">
         <Row type="flex" justify="space-between">
           <Col span={22}>
             <span className="name">{item.name}</span>
           </Col>
           <Col span={2} className="content-right">
-            <Badge count={item.qty}></Badge>
+            <Badge count={<Icon type="minus-circle" />}></Badge>
           </Col>
         </Row>
       </Col>
@@ -95,15 +98,15 @@ export class OrderCart extends Component {
 
     return (
       <div className="order-cart">
-        <div className="top">
-          <Row className="cart-header" type="flex" align="middle">
-            <Col className="title" span={12}>
-              Oder Status
-            </Col>
-            <Col className="nav-back" span={12} onClick={this.props.onClick}>
-              Hide <Icon type="arrow-right" />
-            </Col>
-          </Row>
+        <Row className="cart-header" type="flex" align="middle">
+          <Col className="title" span={12}>
+            Oder Status
+          </Col>
+          <Col className="nav-back" span={12} onClick={this.props.onClick}>
+            Hide <Icon type="arrow-right" />
+          </Col>
+        </Row>
+        <Row className="cart-content">
           <Timeline>
             <Timeline.Item>
               <GroupedItems name="Ordered" total="15 items" items={items} />
@@ -118,7 +121,7 @@ export class OrderCart extends Component {
               <GroupedItems name="Serve" total="" items={[]} />
             </Timeline.Item>
           </Timeline>
-        </div>
+        </Row>
         <div className="bottom">
           <CartBottom />
         </div>

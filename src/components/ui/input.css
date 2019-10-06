@@ -1,0 +1,133 @@
+.size-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.size-list .size {
+  background: #f6f6f6;
+  padding: 0.25em 1em;
+  margin: 0 1px;
+}
+
+.size-list .size .text {
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  font-weight: 900;
+}
+
+.size-list .size .amount {
+  margin-left: 0.5em;
+  font-size: 0.9rem;
+  color: #a6a6a5;
+}
+
+.size-list .size.active {
+  background-color: #54453d;
+  color: #fff;
+}
+
+.size-list .size.active .amount {
+  color: #ffe18e;
+}
+
+.size-list :first-child {
+  border-radius: 20px 0 0 20px;
+}
+
+.size-list :last-child {
+  border-radius: 0 20px 20px 0;
+}
+
+.topping-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.topping-list [type="checkbox"] {
+  opacity: 0;
+  position: absolute;
+}
+
+.topping-list .topping label {
+  display: flex-inline;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+}
+
+.topping-list .custom-checkbox {
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 25px;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.5em 1em;
+  margin: 0 1px;
+}
+
+.topping-list .topping:hover .custom-checkbox,
+.topping-list [type="checkbox"]:focus + label .custom-checkbox {
+  background: #54453d;
+  color: #fff;
+}
+
+.topping-list [type="checkbox"]:checked + label .custom-checkbox {
+  background: #54453d;
+  color: #fff;
+}
+
+.topping-list [type="checkbox"]:not(:checked):not(:hover) + label .custom-checkbox {
+  background-color: #f6f6f6;
+  color: #54453d;
+}
+
+.content-right {
+  text-align: right;
+}
+
+.cc .code-input {
+  font-size: 1.5em;
+  border: none !important;
+  background: none !important;
+}
+
+.cc .code-input :focus {
+  border: none !important;
+}
+
+.cc .code-input::-webkit-input-placeholder {
+  color: #a6a6a5;
+  font-size: 2em;
+  line-height: 25px;
+}
+
+.cc .code-input:-ms-input-placeholder {
+  color: #a6a6a5;
+  font-size: 2em;
+  line-height: 25px;
+}
+
+.cc .code-input::-ms-input-placeholder {
+  color: #a6a6a5;
+  font-size: 2em;
+  line-height: 25px;
+}
+
+.cc .code-input::placeholder {
+  color: #a6a6a5;
+  font-size: 2em;
+  line-height: 25px;
+}
+
+.cc .text-input {
+  font-size: 1.5em;
+  color: #54453d;
+  border: none !important;
+  background-color: #f6f6f6;
+  text-transform: uppercase;
+}
+/*# sourceMappingURL=input.css.map */

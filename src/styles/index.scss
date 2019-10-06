@@ -124,25 +124,28 @@ body {
   flex-flow: column;
   left: 0;
   height: 100%;
-  .top {
-    padding: 0 1em 1em 1em;
-
-    .cart-header {
-      margin-bottom: 2em;
-      .title {
-        font-size: 1.9em;
-        font-weight: $fw-bold;
-        text-transform: capitalize;
-      }
-      .nav-back {
-        text-align: right;
-        cursor: pointer;
-        i {
-          margin-left: 0.5em;
-        }
+  .cart-header {
+    padding: 0 1em;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: $color-white;
+    .title {
+      font-size: 1.8em;
+      font-weight: $fw-bold;
+      text-transform: capitalize;
+    }
+    .nav-back {
+      text-align: right;
+      cursor: pointer;
+      i {
+        margin-left: 0.5em;
       }
     }
-
+  }
+  .cart-content {
+    overflow-y: auto;
+    padding: 1em;
     .title-row {
       line-height: 2em;
       margin-bottom: 0.5em;
@@ -175,37 +178,95 @@ body {
         font-size: $fs-std;
         word-break: break-word;
       }
+      .qty {
+        font-weight: $fw-bold;
+        font-size: $fs-h3;
+        text-align: center;
+      }
     }
   }
   .bottom {
     background-color: $color-light-grey;
     padding: 1em;
-    height: 100%;
-    .sub-price {
-      font-size: $fs-std;
-      border-bottom: 2px solid #e8e8e8;
-      margin-bottom: 0.5em;
-      .title {
-        color: $color-grey;
+    // height: 100%;
+    .cart-bottom {
+      padding-bottom: 2em;
+      .sub-price {
+        font-size: $fs-std;
+        border-bottom: 2px solid #e8e8e8;
+        margin-bottom: 0.5em;
+        .title {
+          color: $color-grey;
+        }
+        .price {
+          font-weight: $fw-bold;
+          color: $color-black-light;
+        }
       }
-      .price {
-        font-weight: $fw-bold;
-        color: $color-black-light;
-      }
-    }
-    .total-price {
-      margin-bottom: 0.5em;
-      .title {
-        font-size: $fs-h3;
-      }
-      .price {
-        font-size: $fs-h2;
-        font-weight: $fw-bold;
+      .total-price {
+        margin-bottom: 0.5em;
+        .title {
+          font-size: $fs-h3;
+        }
+        .price {
+          font-size: $fs-h2;
+          font-weight: $fw-bold;
+        }
       }
     }
   }
 }
+.payment {
+  padding: 2em;
+  .payment-list {
+    .payment-item {
+      padding: 1em;
+      height: 100%;
+      .method {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        padding: 1em;
+        border-radius: 15px;
+        border: solid 1px $color-light-grey;
+        background-color: $color-white;
+        opacity: 0.5;
+        &.active {
+          border: solid 5px $color-yellow;
+          opacity: 1;
+        }
+      }
+      .card-code {
+        margin-bottom: 1em;
+      }
+    }
+  }
+  .desc {
+    text-align: center;
+    color: $color-grey;
+  }
+  .total {
+    margin-top: 3em;
+    .title {
+      text-align: center;
+      color: $color-grey;
+      margin: 0;
+    }
+    .number {
+      font-size: $fs-h1;
+      text-align: center;
+      font-weight: $fw-bold;
+    }
+  }
+}
 
+.txt-center {
+  text-align: center;
+}
+.txt-bold {
+  font-weight: $fw-bold;
+}
 .mt-2 {
   margin-top: 2em;
 }
