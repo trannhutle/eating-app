@@ -3,7 +3,7 @@ import FoodCard from "./FoodCard";
 import { Row } from "antd";
 const foodList = [
   {
-    uuid: "Lasagna Alla Bolognese",
+    uuid: "prod-01",
     name: "Lasagna Alla Bolognese",
     price: "17.5",
     desc:
@@ -12,7 +12,7 @@ const foodList = [
       "//static.vietnammm.com/images/restaurants/vn/5QPOR5N/products/lasagna-alla-bolognese.png"
   },
   {
-    uuid: "Pizza Margherita (Large) ",
+    uuid: "prod-02",
     name: "Pizza Margherita (Large) ",
     price: "13.5",
     desc: "Mozzarella cheese, basil, oregano & tomato sauce",
@@ -20,7 +20,7 @@ const foodList = [
       "//static.vietnammm.com/images/restaurants/vn/5QPOR5N/products/pizza-margherita.png"
   },
   {
-    uuid: "Tagliatelle Al Funghi porcini ",
+    uuid: "prod-03",
     name: "Tagliatelle Al Funghi porcini ",
     price: "13.5",
     desc: "Fettuccine tossed with mushroom cream sauce on top parmesan",
@@ -28,7 +28,7 @@ const foodList = [
       "//static.vietnammm.com/images/restaurants/vn/5QPOR5N/products/tagliatelle-al-funghi.png"
   },
   {
-    uuid: "Tagliatelle Nere Con Calamari E Vongole ",
+    uuid: "prod-04",
     name: "Tagliatelle Nere Con Calamari E Vongole ",
     price: "13.5",
     desc:
@@ -37,7 +37,7 @@ const foodList = [
       "//static.vietnammm.com/images/restaurants/vn/5QPOR5N/products/tagliatelle-nere-con-calamari-e-vongole.png"
   },
   {
-    uuid: "Calamari Alla Grigliata ",
+    uuid: "prod-05",
     name: "Calamari Alla Grigliata ",
     price: "13.5",
     desc:
@@ -46,7 +46,7 @@ const foodList = [
       "//static.vietnammm.com/images/restaurants/vn/5QPOR5N/products/calamari-alla-grigliata.png"
   },
   {
-    uuid: "Petto Di Pollo Alla Milanese",
+    uuid: "prod-06",
     name: "Petto Di Pollo Alla Milanese",
     price: "13.5",
     desc: "Pan fried Chicken breast, Milanese style served with French fries",

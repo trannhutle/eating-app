@@ -1,8 +1,7 @@
 import React from "react";
 import { Menu, Icon, Row, Col } from "antd";
-import { ViewCardBtn } from "./buttons/Buttons";
+import { ViewCardBtn } from "./ui/Buttons";
 import CardList from "./CardList";
-
 function Home() {
   return (
     <div className="wrapper">
@@ -42,6 +41,8 @@ function Home() {
         <h1 className="category">Pizza</h1>
         <CardList />
       </div>
+
+     
     </div>
   );
 }

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Card, Button } from "antd";
+import { Link } from "react-router-dom";
+import { withRouter } from "react-router";
 const SMALL_DEVICE = 500;
 const MEDIUM_DEVICE = 992;
 const LARGE_DEVICE = 1200;
@@ -16,11 +18,19 @@ const layoutCollumn = () => {
     return "ant-col-6";
   }
 };
-const CardImage = ({ food }) => {
+const CardImage = ({ food, history }) => {
   return (
     <div>
       <img alt={food.name} src={food.imgUrl} />
-      <Button type="primary" shape="circle" icon="plus" size="small" />
+      <Button
+        type="primary"
+        shape="circle"
+        icon="plus"
+        size="small"
+        onClick={() => {
+          history.push("product/test");
+        }}
+      ></Button>
     </div>
   );
 };
@@ -39,12 +49,13 @@ export class FoodCard extends Component {
   }
   render() {
     const { food } = this.props;
+    const { match, location, history } = this.props;
     console.log(this.props);
     return (
       <div className={`card ${this.state.colNum}`}>
         <Card
           style={{ background: "none" }}
-          cover={<CardImage food={food} />}
+          cover={<CardImage food={food} history={history} />}
           size="small"
           bordered={false}
         >
@@ -56,4 +67,4 @@ export class FoodCard extends Component {
     );
   }
 }
-export default FoodCard;
+export default withRouter(FoodCard);

@@ -4,7 +4,7 @@ import { Icon, Row, Col, Drawer } from "antd";
 import { ViewCardBtn } from "./ui/Buttons";
 import OrderCart from "./OrderCart";
 
-class FoodDetailPage extends Component {
+export class FoodDetailPage extends Component {
   state = {
     visible: false
   };
@@ -21,6 +21,7 @@ class FoodDetailPage extends Component {
     });
   };
   render() {
+    console.log("render is called");
     return (
       <div className="header">
         <Row>
@@ -33,11 +34,7 @@ class FoodDetailPage extends Component {
           </Col>
         </Row>
         <Detail />
-        <Drawer
-          width={"20em"}
-          closable={false}
-          visible={this.state.visible}
-        >
+        <Drawer width={"20em"} closable={false} visible={this.state.visible}>
           <OrderCart onClick={this.closeCart} />
         </Drawer>
       </div>
