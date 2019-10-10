@@ -1,23 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { Icon, Button } from "antd";
 import PropsTypes from "prop-types";
-
+import OrderCart from "../carts/OrderCart";
 import "./button.scss";
 
 const INCREASE = "INCREASE";
 const DECREASE = "DECREASE";
 
 export const ViewCardBtn = props => {
-  const handleClick = e => {
+  const [visible, setVisible] = useState(false);
+  const openCart = e => {
     console.log("calll this function");
-    props.onClick(e);
+    setVisible(true);
+  };
+  const closeCart = event => {
+    setVisible(false);
   };
   return (
-    <Button className="btn-view-card" onClick={handleClick}>
-      <Icon type="gift" />
-      Order Status
-      <span className="count">50</span>
-    </Button>
+    <div>
+      <Button className="btn-view-card" onClick={openCart}>
+        <Icon type="gift" />
+        Order Status
+        <span className="count">50</span>
+      </Button>
+      <OrderCart visible={visible} onClose={closeCart} />
+    </div>
   );
 };
 

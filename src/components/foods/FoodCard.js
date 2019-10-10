@@ -2,22 +2,7 @@ import React, { Component } from "react";
 import { Card, Button } from "antd";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
-const SMALL_DEVICE = 500;
-const MEDIUM_DEVICE = 992;
-const LARGE_DEVICE = 1200;
 
-const layoutCollumn = () => {
-  const width = window.innerWidth;
-  if (width <= SMALL_DEVICE) {
-    return "ant-col-24";
-  } else if (SMALL_DEVICE < width && width < MEDIUM_DEVICE) {
-    return "ant-col-12";
-  } else if (MEDIUM_DEVICE <= width && width < LARGE_DEVICE) {
-    return "ant-col-8";
-  } else {
-    return "ant-col-6";
-  }
-};
 const CardImage = ({ food, history }) => {
   return (
     <div>
@@ -36,23 +21,11 @@ const CardImage = ({ food, history }) => {
 };
 
 export class FoodCard extends Component {
-  state = { colNum: layoutCollumn() };
-
-  setLayout = () => {
-    this.setState({ colNum: layoutCollumn() });
-  };
-  componentDidMount() {
-    window.addEventListener("resize", this.setLayout);
-  }
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.setLayout);
-  }
   render() {
-    const { food } = this.props;
-    const { match, location, history } = this.props;
+    const { food, history } = this.props;
     console.log(this.props);
     return (
-      <div className={`card ${this.state.colNum}`}>
+      <div className={`card card-col`}>
         <Card
           style={{ background: "none" }}
           cover={<CardImage food={food} history={history} />}

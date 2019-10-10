@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Row, Col, Button } from "antd";
-import { OrderBtn } from "./ui/Buttons";
-import { SpinBox } from "./ui/Buttons";
-import { SizeSelections, ToppingSelections } from "./ui/Input";
-
+import { OrderBtn } from "../ui/Buttons";
+import { SpinBox } from "../ui/Buttons";
+import { SizeSelections, ToppingSelections } from "../ui/Input";
+import { withRouter } from "react-router";
 const Size = props => {
   return (
     <div className="size active">
@@ -98,4 +98,4 @@ export class Detail extends Component {
   }
 }
 
-export default Detail;
+export default withRouter(Detail);

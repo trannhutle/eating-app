@@ -10,6 +10,9 @@ body {
   color: $color-black;
   background-color: $color-light-brow;
 }
+.container {
+  padding: 2em 2em 0 2em;
+}
 
 // Start layout
 .wrapper {
@@ -76,13 +79,45 @@ body {
   color: $color-black;
 }
 
-.container {
+.card-container {
   display: flex;
   flex-flow: wrap;
   align-items: stretch;
   .card {
     display: flex;
     flex-flow: column;
+    box-sizing: border-box;
+  }
+  @media (min-width: 1281px) {
+    .card-col {
+      width: 16.66666666667%;
+    }
+  }
+  @media (min-width: 1025px) and (max-width: 1280px) {
+    .card-col {
+      width: 20%;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .card-col {
+      width: 33.33333333%;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    .card-col {
+      width: 25%;
+    }
+  }
+  @media (min-width: 481px) and (max-width: 767px) {
+    .card-col {
+      width: 50%;
+    }
+  }
+  @media (min-width: 320px) and (max-width: 480px) {
+    .card-col {
+      width: 100%;
+    }
   }
 }
 

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { Icon, Row, Col, Timeline, Badge } from "antd";
-import { CloseTableBtn } from "./ui/Buttons";
+import { Icon, Row, Col, Timeline, Badge, Drawer } from "antd";
+import { CloseTableBtn } from "../ui/Buttons";
+import { withRouter } from "react-router";
+
 const Item = ({ item }) => {
   return (
     <Row className="item" type="flex">
@@ -77,6 +79,10 @@ const CartBottom = () => {
   );
 };
 export class OrderCart extends Component {
+
+  closeCart = event => {
+    
+  };
   render() {
     let items = [
       {
@@ -97,36 +103,38 @@ export class OrderCart extends Component {
     ];
 
     return (
-      <div className="order-cart">
-        <Row className="cart-header" type="flex" align="middle">
-          <Col className="title" span={12}>
-            Oder Status
-          </Col>
-          <Col className="nav-back" span={12} onClick={this.props.onClick}>
-            Hide <Icon type="arrow-right" />
-          </Col>
-        </Row>
-        <Row className="cart-content">
-          <Timeline>
-            <Timeline.Item>
-              <GroupedItems name="Ordered" total="15 items" items={items} />
-            </Timeline.Item>
-            <Timeline.Item>
-              <GroupedItems name="Baking" total="15 items" items={items} />
-            </Timeline.Item>
-            <Timeline.Item>
-              <GroupedItems name="Finishing" total="" items={[]} />
-            </Timeline.Item>
-            <Timeline.Item>
-              <GroupedItems name="Serve" total="" items={[]} />
-            </Timeline.Item>
-          </Timeline>
-        </Row>
-        <div className="bottom">
-          <CartBottom />
+      <Drawer width={"20em"} closable={false} visible={this.props.visible}>
+        <div className="order-cart">
+          <Row className="cart-header" type="flex" align="middle">
+            <Col className="title" span={12}>
+              Oder Status
+            </Col>
+            <Col className="nav-back" span={12} onClick={this.props.onClose}>
+              Hide <Icon type="arrow-right" />
+            </Col>
+          </Row>
+          <Row className="cart-content">
+            <Timeline>
+              <Timeline.Item>
+                <GroupedItems name="Ordered" total="15 items" items={items} />
+              </Timeline.Item>
+              <Timeline.Item>
+                <GroupedItems name="Baking" total="15 items" items={items} />
+              </Timeline.Item>
+              <Timeline.Item>
+                <GroupedItems name="Finishing" total="" items={[]} />
+              </Timeline.Item>
+              <Timeline.Item>
+                <GroupedItems name="Serve" total="" items={[]} />
+              </Timeline.Item>
+            </Timeline>
+          </Row>
+          <div className="bottom">
+            <CartBottom />
+          </div>
         </div>
-      </div>
+      </Drawer>
     );
   }
 }
-export default OrderCart;
+export default withRouter(OrderCart);

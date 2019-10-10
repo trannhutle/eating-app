@@ -57,7 +57,7 @@ const foodList = [
 
 export const CardList = ({ props }) => {
   return (
-    <Row className="container">
+    <Row className="card-container">
       {foodList.map(food => (
         <FoodCard key={food.uuid} food={food} />
       ))}
