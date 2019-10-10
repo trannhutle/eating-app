@@ -31,8 +31,12 @@ export const ViewCardBtn = props => {
 export const OrderBtn = ({ props }) => {
   return <button className="btn btn-order">Place Order</button>;
 };
-export const CloseTableBtn = ({ props }) => {
-  return <button className="btn btn-order">Start to place order</button>;
+export const CloseTableBtn = ({ onClick }) => {
+  return (
+    <button onClick={onClick} className="btn btn-order">
+      Start to place order
+    </button>
+  );
 };
 export const PayNowBtn = ({ props }) => {
   return <button className="btn btn-order">Pay Now</button>;

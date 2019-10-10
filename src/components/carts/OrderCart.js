@@ -42,47 +42,47 @@ const GroupedItems = ({ name, total, items }) => {
     </Row>
   );
 };
-const CartBottom = () => {
-  return (
-    <Row className="cart-bottom">
-      <Row
-        className="sub-price"
-        type="flex"
-        align="middle"
-        justify="space-between"
-      >
-        <span className="title">Subtotal</span>
-        <span className="price">$15.6</span>
-      </Row>
-      <Row
-        className="sub-price"
-        type="flex"
-        align="middle"
-        justify="space-between"
-      >
-        <span className="title">Discount -10%</span>
-        <span className="price">$15.6</span>
-      </Row>
-      <Row
-        className="total-price"
-        type="flex"
-        align="middle"
-        justify="space-between"
-      >
-        <span className="title">Total</span>
-        <span className="price">$15.6</span>
-      </Row>
-      <Row type="flex" justify="center">
-        <CloseTableBtn cl />
-      </Row>
-    </Row>
-  );
-};
-export class OrderCart extends Component {
 
-  closeCart = event => {
-    
-  };
+const CartBottom = withRouter(props => (
+  <Row className="cart-bottom">
+    <Row
+      className="sub-price"
+      type="flex"
+      align="middle"
+      justify="space-between"
+    >
+      <span className="title">Subtotal</span>
+      <span className="price">$15.6</span>
+    </Row>
+    <Row
+      className="sub-price"
+      type="flex"
+      align="middle"
+      justify="space-between"
+    >
+      <span className="title">Discount -10%</span>
+      <span className="price">$15.6</span>
+    </Row>
+    <Row
+      className="total-price"
+      type="flex"
+      align="middle"
+      justify="space-between"
+    >
+      <span className="title">Total</span>
+      <span className="price">$15.6</span>
+    </Row>
+    <Row type="flex" justify="center">
+      <CloseTableBtn
+        onClick={() => {
+          props.history.push("/checkout");
+        }}
+      />
+    </Row>
+  </Row>
+));
+export class OrderCart extends Component {
+  closeCart = event => {};
   render() {
     let items = [
       {

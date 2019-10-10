@@ -1,0 +1,31 @@
+@import "../../styles/config.scss";
+ul.filter {
+  list-style-type: none;
+  padding: 0;
+  display: inherit;
+  li {
+    display: inline;
+    text-transform: uppercase;
+    margin: 0 5px;
+    padding: 0 5px;
+    font-size: 0.8rem;
+    cursor: pointer;
+
+    &.active {
+      border: 1.3px solid $color-grey;
+      font-weight: bolder;
+      border-radius: 3px;
+    }
+    &.active:hover {
+      background-color: $color-white;
+      //   border: none;
+      //   font-weight: 400;
+    }
+  }
+  li:hover {
+    border: 1.3px solid $color-grey;
+    border-radius: 3px;
+    font-weight: bolder;
+    transition: $trans-normal;
+  }
+}

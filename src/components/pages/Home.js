@@ -1,38 +1,64 @@
-import React from "react";
+import React, { useState } from "react";
 import { Menu, Icon, Row, Col } from "antd";
-import { ViewCardBtn } from "../ui/Buttons";
+import { ViewCardBtn, PayNowBtn } from "../ui/Buttons";
 import CardList from "../foods/CardList";
 import Layout from "../Layout";
+import { FoodCatMenu, FoodCategoryFilters } from "../ui/Lists";
+const foodCatListServ = [
+  {
+    id: "cat-01",
+    name: "Pasta",
+    isActive: true
+  },
+  {
+    id: "cat-02",
+    name: "Sandwishes",
+    isActive: false
+  }
+];
+const foodCaFilterListServ = [
+  {
+    id: "cat-filt-01",
+    name: "Vegitarian",
+    isActive: false
+  },
+  {
+    id: "cat-filt-02",
+    name: "Vegan",
+    isActive: false
+  },
+  {
+    id: "cat-filt-03",
+    name: "Spicy",
+    isActive: false
+  }
+];
+
 function Home(props) {
+  const onSelectCat = catId => {
+    {
+      console.log("This is onSelectCat: ", catId);
+    }
+  };
+  const onSelectFilter = filterId => {
+    {
+      console.log("This is onSelectFilter: ", filterId);
+    }
+  };
   return (
-    <Layout >
+    <Layout>
       <div className="wrapper">
         <div className="sider">
           <div className="logo">VITTORIO</div>
-          <Menu>
-            <Menu.Item key="1">
-              <span className="nav-text title">Category</span>
-            </Menu.Item>
-            <Menu.Item key="2">
-              <Icon type="swap-right" />
-              <span className="nav-text">Pasta</span>
-            </Menu.Item>
-            <Menu.Item key="3">
-              <span className="nav-text">Sandwishes</span>
-            </Menu.Item>
-          </Menu>
+          <FoodCatMenu foodCatList={foodCatListServ} onSelect={onSelectCat} />
         </div>
         <div className="header">
           <Row type="flex" align="bottom">
             <Col span={18}>
-              <Row>
-                <span className="nav-text title">filter</span>
-              </Row>
-              <Row>
-                <span className="filter active"># Vegetarian</span>
-                <span className="filter"># Vegan</span>
-                <span className="filter"># ALL FILTERS</span>
-              </Row>
+              <FoodCategoryFilters
+                foodFilterList={foodCaFilterListServ}
+                onSelect={onSelectFilter}
+              />
             </Col>
             <Col span={6}>
               <ViewCardBtn />

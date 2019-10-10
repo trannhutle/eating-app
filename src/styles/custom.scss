@@ -49,6 +49,10 @@
   border: none;
   background: none;
 }
+.ant-menu-item-selected {
+  background: none !important;
+}
+
 .ant-timeline {
   :last-child {
     padding-bottom: 0;

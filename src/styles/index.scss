@@ -59,18 +59,6 @@ body {
   }
 }
 
-.filter {
-  text-transform: uppercase;
-  margin: 0 5px;
-  padding: 0 5px;
-  font-size: $fs-h5;
-
-  &.active {
-    border: 1.3px solid $color-grey;
-    border-radius: 3px;
-    font-weight: bolder;
-  }
-}
 
 .category {
   font-size: $fs-h1;
@@ -151,6 +139,7 @@ body {
   font-weight: $fw-bold;
   text-transform: uppercase;
   font-size: $fs-h4;
+  cursor: pointer;
 }
 
 .order-cart {

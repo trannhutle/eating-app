@@ -19,6 +19,7 @@
     &.active {
       background-color: $color-dark-brow;
       color: $color-white;
+      transition: $trans-normal;
       .amount {
         color: $color-yellow;
       }
