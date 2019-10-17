@@ -152,6 +152,7 @@ body {
   flex-flow: column;
   left: 0;
   height: 100%;
+  width: 100%;
   .cart-header {
     padding: 0 1em;
     position: sticky;
@@ -291,6 +292,9 @@ body {
 
 .txt-center {
   text-align: center;
+}
+.txt-right {
+  text-align: right;
 }
 .txt-bold {
   font-weight: $fw-bold;
