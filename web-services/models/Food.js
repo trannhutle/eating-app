@@ -12,8 +12,8 @@ const foodSchema = Schema({
   imgUrl: String,
   sizes: [
     {
-      // _sizeId: String,
       name: String,
+      price: Number,
       qty: Number,
       unit: String,
       selected: { type: Boolean, default: false }

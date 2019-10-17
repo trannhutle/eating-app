@@ -48,21 +48,24 @@ const food = new Food({
   sizes: [
     {
       name: "Small",
-      qyt: "320",
-      init: "g",
-      selected: true
+      qty: "320",
+      unit: "g",
+      selected: true,
+      price: 0
     },
     {
       name: "Medium",
-      qyt: "380",
-      init: "g",
-      selected: false
+      qty: "380",
+      unit: "g",
+      selected: false,
+      price: 1
     },
     {
       name: "Medium",
-      qyt: "450",
-      init: "g",
-      selected: false
+      qty: "450",
+      unit: "g",
+      selected: false,
+      price: 2
     }
   ],
   toppings: [
@@ -111,21 +114,24 @@ const food1 = new Food({
   sizes: [
     {
       name: "Small",
-      qyt: "320",
+      qty: "320",
       selected: true,
-      init: "g"
+      unit: "g",
+      price: 0
     },
     {
       name: "Medium",
-      qyt: "380",
+      qty: "380",
       selected: false,
-      init: "g"
+      unit: "g",
+      price: 2
     },
     {
       name: "Medium",
-      qyt: "450",
+      qty: "450",
       selected: false,
-      init: "g"
+      unit: "g",
+      price: 3
     }
   ],
   toppings: [
@@ -146,7 +152,7 @@ const food1 = new Food({
     {
       name: "Seafood",
       selected: false,
-      price: 5
+      price: 5,
     },
     {
       name: "Spaghetti",
@@ -174,15 +180,17 @@ const food2 = new Food({
   sizes: [
     {
       name: "Small",
-      qyt: "320",
-      init: "g",
-      selected: true
+      qty: "320",
+      unit: "g",
+      selected: true,
+      price: 0
     },
     {
       name: "Medium",
-      qyt: "450",
-      init: "g",
-      selected: false
+      qty: "450",
+      unit: "g",
+      selected: false,
+      price: 2
     }
   ],
   toppings: [
@@ -231,15 +239,17 @@ const food3 = new Food({
   sizes: [
     {
       name: "Small",
-      qyt: "320",
-      init: "g",
-      selected: true
+      qty: "320",
+      unit: "g",
+      selected: true,
+      price: 0
     },
     {
       name: "Medium",
-      qyt: "450",
-      init: "g",
-      selected: false
+      qty: "450",
+      unit: "g",
+      selected: false,
+      price: 2
     }
   ],
   toppings: [
@@ -289,9 +299,10 @@ const food4 = new Food({
   sizes: [
     {
       name: "Small",
-      qyt: "",
-      init: "",
-      selected: true
+      qty: "",
+      unit: "",
+      selected: true,
+      price: 1
     }
   ],
   toppings: [
@@ -336,9 +347,10 @@ const food5 = new Food({
   sizes: [
     {
       name: "Small",
-      qyt: "",
-      init: "",
-      selected: true
+      qty: "",
+      unit: "",
+      selected: true,
+      price: 1
     }
   ],
   toppings: [
@@ -384,9 +396,10 @@ const food6 = new Food({
   sizes: [
     {
       name: "Small",
-      qyt: "",
-      init: "",
-      selected: true
+      qty: "",
+      unit: "",
+      selected: true,
+      price: 1
     }
   ],
   toppings: [
@@ -431,9 +444,10 @@ const food7 = new Food({
   sizes: [
     {
       name: "Small",
-      qyt: "",
-      init: "",
-      selected: true
+      qty: "",
+      unit: "",
+      selected: true,
+      price: 1
     }
   ],
   toppings: [
@@ -482,9 +496,10 @@ const food8 = new Food({
   sizes: [
     {
       name: "Small",
-      qyt: "",
-      init: "",
-      selected: true
+      qty: "",
+      unit: "",
+      selected: true,
+      price: 1
     }
   ],
   toppings: [
@@ -534,9 +549,10 @@ const food9 = new Food({
   sizes: [
     {
       name: "Small",
-      qyt: "",
-      init: "",
-      selected: true
+      qty: "",
+      unit: "",
+      selected: true,
+      price: 1
     }
   ],
   toppings: [

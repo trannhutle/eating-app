@@ -6,33 +6,81 @@ import { SizeSelections, ToppingSelections } from "../ui/Input";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
 import { handleFetchFoodDetail } from "../../actions/foodDetails";
-const Size = props => {
-  return (
-    <div className="size active">
-      <span className="text">{props.size}</span>
-      <span className="amount">{props.quantity}</span>
-    </div>
-  );
-};
 
 export class Detail extends Component {
   state = {
     qty: 1,
+    total: 0,
     details: null
   };
 
   handleChangeQuanity = value => {
     this.setState({ qty: value });
   };
+  handleUpdatedSizes = values => {
+    // const { sizes } = ;
 
+    const totalNotIncludeSize = this.state.details.sizes
+      .filter(size => size.selected)
+      .reduce((prev, currentValue) => {
+        return prev - currentValue.price;
+      }, this.state.total);
+    console.log("totalNotIncludeSize", this.state.details.sizes);
+    console.log("totalNotIncludeSize", totalNotIncludeSize);
+    console.log("values", values);
+    const total = values
+      .filter(size => size.selected)
+      .reduce((prev, currentValue) => {
+        return prev + currentValue.price;
+      }, totalNotIncludeSize);
+      console.log("total", total);
+      
+    this.setState({
+      details: Object.assign({}, this.state.details, { sizes: values }),
+      total: total
+    });
+  };
+  handleUpdatedToppings = values => {
+    this.setState({
+      details: Object.assign({}, this.state.details, { toppings: values })
+    });
+  };
+  handleUpdatedExtras = updatedValues => {
+    console.log("updatedValues", updatedValues);
+    console.log("beforeUpdateValue", this.state.details.extras);
+
+    // Remove all the selected extras from previous state
+    const totalNotIncludeExtra = this.state.details.extras
+      .filter(extra => extra.selected)
+      .reduce((prevTotal, curValue) => {
+        return prevTotal - curValue.price;
+      }, this.state.total);
+    // Add selected extra to total
+    const total = updatedValues
+      .filter(extra => extra.selected)
+      .reduce((prevTotal, curValue) => {
+        return prevTotal + curValue.price;
+      }, totalNotIncludeExtra);
+
+    this.setState({
+      details: Object.assign({}, this.state.details, {
+        extras: updatedValues
+      }),
+      total: total
+    });
+  };
   componentDidMount() {
     const { params } = this.props.match;
     this.props.dispatch(handleFetchFoodDetail(params.productId)).then(() => {
       console.log("After dispatch", this.props.foodDetails);
 
-      this.setState({ details: this.props.foodDetails });
+      this.setState({
+        details: this.props.foodDetails,
+        total: this.props.foodDetails.price
+      });
     });
   }
+
   render() {
     const details = this.state.details;
     console.log("render is called", this.state);
@@ -55,47 +103,22 @@ export class Detail extends Component {
           <h3 className="title mt-2">Size</h3>
 
           <SizeSelections
-            options={[
-              {
-                name: "Small",
-                size: "320g",
-                isActive: false
-              },
-              {
-                name: "Medium",
-                size: "320g",
-                isActive: true
-              },
-              {
-                name: "Large",
-                size: "320g",
-                isActive: false
-              }
-            ]}
+            options={details.sizes}
+            handleUpdate={this.handleUpdatedSizes}
           />
           <h3 className="title mt-2">Topping</h3>
           <ToppingSelections
-            options={details.toppings.map(topping => {
-              return {
-                id: topping._id,
-                name: topping.name,
-                selected: topping.selected
-              };
-            })}
+            options={details.toppings}
+            handleUpdate={this.handleUpdatedToppings}
           />
           <h3 className="title mt-2">Extra</h3>
           <ToppingSelections
-            options={details.extras.map(extra => {
-              return {
-                id: extra._id,
-                name: extra.name,
-                selected: extra.selected
-              };
-            })}
+            options={details.extras}
+            handleUpdate={this.handleUpdatedExtras}
           />
           <Row type="flex" align="middle" className="mt-2">
             <span style={{ fontSize: "2.5rem", marginRight: "1em" }}>
-              ${details.price}
+              ${this.state.total}
             </span>
             <SpinBox
               value={this.state.qty}
