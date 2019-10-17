@@ -48,7 +48,7 @@ export const SpinBox = props => {
     operator === INCREASE
       ? (value = props.value + 1)
       : (value = props.value - 1);
-    props.onChange(value);
+    if (value > 0) props.onChange(value);
   };
 
   return (

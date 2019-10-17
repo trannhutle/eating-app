@@ -6,7 +6,8 @@ import { SizeSelections, ToppingSelections } from "../ui/Input";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
 import { handleFetchFoodDetail } from "../../actions/foodDetails";
-
+import { relativeTimeRounding } from "moment";
+import { round } from "../../utils/appUtils";
 export class Detail extends Component {
   state = {
     qty: 1,
@@ -15,7 +16,11 @@ export class Detail extends Component {
   };
 
   handleChangeQuanity = value => {
-    this.setState({ qty: value });
+    const total = (this.state.total / (this.state.qty * 1.0)) * value;
+    this.setState({
+      qty: value,
+      total: total
+    });
   };
   handleUpdatedSizes = values => {
     // const { sizes } = ;
@@ -23,18 +28,14 @@ export class Detail extends Component {
     const totalNotIncludeSize = this.state.details.sizes
       .filter(size => size.selected)
       .reduce((prev, currentValue) => {
-        return prev - currentValue.price;
+        return prev - currentValue.price * this.state.qty;
       }, this.state.total);
-    console.log("totalNotIncludeSize", this.state.details.sizes);
-    console.log("totalNotIncludeSize", totalNotIncludeSize);
-    console.log("values", values);
     const total = values
       .filter(size => size.selected)
       .reduce((prev, currentValue) => {
-        return prev + currentValue.price;
+        return prev + currentValue.price * this.state.qty;
       }, totalNotIncludeSize);
-      console.log("total", total);
-      
+
     this.setState({
       details: Object.assign({}, this.state.details, { sizes: values }),
       total: total
@@ -53,13 +54,13 @@ export class Detail extends Component {
     const totalNotIncludeExtra = this.state.details.extras
       .filter(extra => extra.selected)
       .reduce((prevTotal, curValue) => {
-        return prevTotal - curValue.price;
+        return prevTotal - curValue.price * this.state.qty;
       }, this.state.total);
     // Add selected extra to total
     const total = updatedValues
       .filter(extra => extra.selected)
       .reduce((prevTotal, curValue) => {
-        return prevTotal + curValue.price;
+        return prevTotal + curValue.price * this.state.qty;
       }, totalNotIncludeExtra);
 
     this.setState({
@@ -117,9 +118,7 @@ export class Detail extends Component {
             handleUpdate={this.handleUpdatedExtras}
           />
           <Row type="flex" align="middle" className="mt-2">
-            <span style={{ fontSize: "2.5rem", marginRight: "1em" }}>
-              ${this.state.total}
-            </span>
+            <span className="total-price">${this.state.total.toFixed(2)}</span>
             <SpinBox
               value={this.state.qty}
               onChange={this.handleChangeQuanity}
