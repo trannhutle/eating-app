@@ -15,14 +15,21 @@ const foodSchema = Schema({
       // _sizeId: String,
       name: String,
       qty: Number,
-      unit: String
+      unit: String,
+      selected: { type: Boolean, default: false }
     }
   ],
   toppings: [
     {
-      // _toppingId: String,
       name: String,
-      price: Number
+      selected: { type: Boolean, default: true }
+    }
+  ],
+  extras: [
+    {
+      name: String,
+      price: Number,
+      selected: { type: Boolean, default: false }
     }
   ],
   tags: [

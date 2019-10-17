@@ -49,30 +49,50 @@ const food = new Food({
     {
       name: "Small",
       qyt: "320",
-      init: "g"
+      init: "g",
+      selected: true
     },
     {
       name: "Medium",
       qyt: "380",
-      init: "g"
+      init: "g",
+      selected: false
     },
     {
       name: "Medium",
       qyt: "450",
-      init: "g"
+      init: "g",
+      selected: false
     }
   ],
   toppings: [
     {
       name: "Seafood",
+      selected: true
+    },
+    {
+      name: "Spaghetti",
+      selected: true
+    },
+    {
+      name: "Prawn",
+      selected: true
+    }
+  ],
+  extras: [
+    {
+      name: "Seafood",
+      selected: false,
       price: 5
     },
     {
       name: "Spaghetti",
+      selected: false,
       price: 1
     },
     {
       name: "Prawn",
+      selected: false,
       price: 2.5
     }
   ],
@@ -92,30 +112,50 @@ const food1 = new Food({
     {
       name: "Small",
       qyt: "320",
+      selected: true,
       init: "g"
     },
     {
       name: "Medium",
       qyt: "380",
+      selected: false,
       init: "g"
     },
     {
       name: "Medium",
       qyt: "450",
+      selected: false,
       init: "g"
     }
   ],
   toppings: [
     {
       name: "Seafood",
-      price: 5
+      selected: true
     },
     {
       name: "Chicken",
+      selected: true
+    },
+    {
+      name: "Prawn",
+      selected: true
+    }
+  ],
+  extras: [
+    {
+      name: "Seafood",
+      selected: false,
+      price: 5
+    },
+    {
+      name: "Spaghetti",
+      selected: false,
       price: 1
     },
     {
       name: "Prawn",
+      selected: false,
       price: 2.5
     }
   ],
@@ -135,26 +175,45 @@ const food2 = new Food({
     {
       name: "Small",
       qyt: "320",
-      init: "g"
+      init: "g",
+      selected: true
     },
     {
       name: "Medium",
       qyt: "450",
-      init: "g"
+      init: "g",
+      selected: false
     }
   ],
   toppings: [
     {
       name: "Anchovies",
-      price: 5
+      selected: true
     },
     {
       name: "Parma Ham",
-      pPrawnrice: 1.5
+      selected: true
     },
     {
       name: "Salmon",
-      price: 3.5
+      selected: true
+    }
+  ],
+  extras: [
+    {
+      name: "Seafood",
+      selected: false,
+      price: 5
+    },
+    {
+      name: "Spaghetti",
+      selected: false,
+      price: 1
+    },
+    {
+      name: "Prawn",
+      selected: false,
+      price: 2.5
     }
   ],
   category: foodCat1._id,
@@ -173,26 +232,45 @@ const food3 = new Food({
     {
       name: "Small",
       qyt: "320",
-      init: "g"
+      init: "g",
+      selected: true
     },
     {
       name: "Medium",
       qyt: "450",
-      init: "g"
+      init: "g",
+      selected: false
     }
   ],
   toppings: [
     {
       name: "Anchovies",
-      price: 5
+      selected: true
     },
     {
       name: "Mussle",
-      price: 1.5
+      selected: true
     },
     {
       name: "Prawn",
-      price: 3.5
+      selected: true
+    }
+  ],
+  extras: [
+    {
+      name: "Seafood",
+      selected: false,
+      price: 5
+    },
+    {
+      name: "Spaghetti",
+      selected: false,
+      price: 1
+    },
+    {
+      name: "Prawn",
+      selected: false,
+      price: 2.5
     }
   ],
   category: foodCat1._id,
@@ -210,17 +288,37 @@ const food4 = new Food({
     "https://static.vietnammm.com/images/restaurants/vn/5QPOR5N/products/spaghetti-aglio-olio-e-peperoncino.png",
   sizes: [
     {
-      name: "Medium"
+      name: "Small",
+      qyt: "",
+      init: "",
+      selected: true
     }
   ],
   toppings: [
     {
       name: "Beef",
-      price: 1.5
+      selected: true
     },
     {
       name: "Prawn",
-      price: 3.5
+      selected: true
+    }
+  ],
+  extras: [
+    {
+      name: "Seafood",
+      selected: false,
+      price: 5
+    },
+    {
+      name: "Spaghetti",
+      selected: false,
+      price: 1
+    },
+    {
+      name: "Prawn",
+      selected: false,
+      price: 2.5
     }
   ],
   category: foodCat2._id,
@@ -237,17 +335,37 @@ const food5 = new Food({
     "https://static.vietnammm.com/images/restaurants/vn/5QPOR5N/products/spaghetti-alla-napoletana.png",
   sizes: [
     {
-      name: "Medium"
+      name: "Small",
+      qyt: "",
+      init: "",
+      selected: true
     }
   ],
   toppings: [
     {
       name: "Broccoli",
-      price: 1.5
+      selected: true
     },
     {
       name: "Prawn",
-      price: 3.5
+      selected: true
+    }
+  ],
+  extras: [
+    {
+      name: "Seafood",
+      selected: false,
+      price: 5
+    },
+    {
+      name: "Spaghetti",
+      selected: false,
+      price: 1
+    },
+    {
+      name: "Prawn",
+      selected: false,
+      price: 2.5
     }
   ],
   category: foodCat2._id,
@@ -265,17 +383,37 @@ const food6 = new Food({
     "https://static.vietnammm.com/images/restaurants/vn/5QPOR5N/products/_0028_spaghetti-alla-vongolejpg.png",
   sizes: [
     {
-      name: "Medium"
+      name: "Small",
+      qyt: "",
+      init: "",
+      selected: true
     }
   ],
   toppings: [
     {
       name: "Clam",
-      price: 1.5
+      selected: true
     },
     {
       name: "Anchovies",
-      price: 3.5
+      selected: true
+    }
+  ],
+  extras: [
+    {
+      name: "Seafood",
+      selected: false,
+      price: 5
+    },
+    {
+      name: "Spaghetti",
+      selected: false,
+      price: 1
+    },
+    {
+      name: "Prawn",
+      selected: false,
+      price: 2.5
     }
   ],
   category: foodCat2._id,
@@ -292,21 +430,41 @@ const food7 = new Food({
     "https://static.vietnammm.com/images/restaurants/vn/5QPOR5N/products/petto-di-pollo-alla-milanese.png",
   sizes: [
     {
-      name: "Medium"
+      name: "Small",
+      qyt: "",
+      init: "",
+      selected: true
     }
   ],
   toppings: [
     {
       name: "Spaghetti Aglio Olio E Peperoncino",
-      price: 1.5
+      selected: true
     },
     {
       name: "Spahgetti Alla Napoletana",
-      price: 3.5
+      selected: true
     },
     {
       name: "Penne Alla Arrabiata",
-      price: 3.5
+      selected: true
+    }
+  ],
+  extras: [
+    {
+      name: "Seafood",
+      selected: false,
+      price: 5
+    },
+    {
+      name: "Spaghetti",
+      selected: false,
+      price: 1
+    },
+    {
+      name: "Prawn",
+      selected: false,
+      price: 2.5
     }
   ],
   category: foodCat3._id,
@@ -323,21 +481,41 @@ const food8 = new Food({
     "https://static.vietnammm.com/images/restaurants/vn/5QPOR5N/products/braciola-di-maiale-alla-griglia.png",
   sizes: [
     {
-      name: "Medium"
+      name: "Small",
+      qyt: "",
+      init: "",
+      selected: true
     }
   ],
   toppings: [
     {
       name: "Spaghetti Aglio Olio E Peperoncino",
-      price: 1.5
+      selected: true
     },
     {
       name: "Spahgetti Alla Napoletana",
-      price: 3.5
+      selected: true
     },
     {
       name: "Penne Alla Arrabiata",
-      price: 3.5
+      selected: true
+    }
+  ],
+  extras: [
+    {
+      name: "Seafood",
+      selected: false,
+      price: 5
+    },
+    {
+      name: "Spaghetti",
+      selected: false,
+      price: 1
+    },
+    {
+      name: "Prawn",
+      selected: false,
+      price: 2.5
     }
   ],
   category: foodCat3._id,
@@ -355,21 +533,41 @@ const food9 = new Food({
     "https://static.vietnammm.com/images/restaurants/vn/5QPOR5N/products/_0025_scaloppine-con-gamberijpg.png",
   sizes: [
     {
-      name: "Medium"
+      name: "Small",
+      qyt: "",
+      init: "",
+      selected: true
     }
   ],
   toppings: [
     {
       name: "Spaghetti Aglio Olio E Peperoncino",
-      price: 1.5
+      selected: true
     },
     {
       name: "Spahgetti Alla Napoletana",
-      price: 3.5
+      selected: true
     },
     {
       name: "Penne Alla Arrabiata",
-      price: 3.5
+      selected: true
+    }
+  ],
+  extras: [
+    {
+      name: "Seafood",
+      selected: false,
+      price: 5
+    },
+    {
+      name: "Spaghetti",
+      selected: false,
+      price: 1
+    },
+    {
+      name: "Prawn",
+      selected: false,
+      price: 2.5
     }
   ],
   category: foodCat3._id,
@@ -397,70 +595,3 @@ FoodCat.create([foodCat1, foodCat2, foodCat3, foodTag4, foodTag5], err => {
     );
   });
 });
-
-// foodCat.save(err => {
-//   if (err) {
-//     console.error("An error is occured", err);
-//     return;
-//   }
-//   const foodTag = new FoodTag({
-//     _id: new ObjectId(),
-//     name: "Seafood"
-//   });
-//   foodTag.save(errFoodTag => {
-//     if (errFoodTag) {
-//       console.error("An error is occured", errFoodTag);
-//       return;
-//     }
-//     const food = new Food({
-//       _id: new ObjectId(),
-//       name: "Spaghetti Allo Scoglio",
-//       price: 13.8,
-//       desc:
-//         "Sauteed assorted seafood, garlic, chilli & parsley in tomato sauce",
-//       status: 1,
-//       imgUrl:
-//         "https://static.vietnammm.com/images/restaurants/vn/5QPOR5N/products/spaghetti-allo-scoglio.png",
-//       sizes: [
-//         {
-//           name: "Small",
-//           qyt: "320",
-//           init: "g"
-//         },
-//         {
-//           name: "Medium",
-//           qyt: "380",
-//           init: "g"
-//         },
-//         {
-//           name: "Medium",
-//           qyt: "450",
-//           init: "g"
-//         }
-//       ],
-//       toppings: [
-//         {
-//           name: "Seafood",
-//           price: 5
-//         },
-//         {
-//           name: "Spaghetti",
-//           price: 1
-//         },
-//         {
-//           name: "Prawn",
-//           price: 2.5
-//         }
-//       ],
-//       tags: [foodTag._id],
-//       category: foodCat._id
-//     });
-//     food.save(foodErr => {
-//       if (foodErr) {
-//         console.error("An error is occured", foodErr);
-//         return;
-//       }
-//       console.log(food);
-//     });
-//   });
-// });

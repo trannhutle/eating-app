@@ -13,7 +13,4 @@ function App() {
     </Router>
   );
 }
-// return <FoodDetailPage />;
-// return <Payment />;
-
 export default App;

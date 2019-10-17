@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Card, Button } from "antd";
-import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 
 const CardImage = ({ food, history }) => {
@@ -13,7 +12,7 @@ const CardImage = ({ food, history }) => {
         icon="plus"
         size="small"
         onClick={() => {
-          history.push("product/test");
+          history.push(`product/${food._id}`);
         }}
       ></Button>
     </div>
