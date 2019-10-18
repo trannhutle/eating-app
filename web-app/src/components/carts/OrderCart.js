@@ -2,46 +2,39 @@ import React, { Component, useState } from "react";
 import { Icon, Row, Col, Timeline, Badge, Drawer } from "antd";
 import { CloseTableBtn } from "../ui/Buttons";
 import { withRouter } from "react-router";
+import { connect } from "react-redux";
 import "./orderCart.scss";
-
-const Topping = () => {
+const Topping = ({ items }) => {
   return (
     <Row type="flex">
-      <div className="border-card topping">
-        <div className="name">Seafood</div>
-        <div className="price">15.5$</div>
-      </div>
-      <div className="border-card topping">
-        <div className="name">Chicken</div>
-        <div className="price">15.5$</div>
-      </div>
-      <div className="border-card topping">
-        <div className="name">Prawn</div>
-        <div className="price">15.5$</div>
-      </div>
+      {items
+        .filter(item => item.selected)
+        .map(item => (
+          <div className="border-card topping">
+            <div className="name">{item.name}</div>
+            <div className="price">{item.price}</div>
+          </div>
+        ))}
     </Row>
   );
 };
-const Extra = () => {
+const Extra = ({ items }) => {
   return (
     <Row type="flex">
-      <div className="border-card extra">
-        <div className="name">Seafood</div>
-        <div className="price">15.5$</div>
-      </div>
-      <div className="border-card extra">
-        <div className="name">Spaghetti</div>
-        <div className="price">15.5$</div>
-      </div>
-      <div className="border-card extra">
-        <div className="name">Prawn</div>
-        <div className="price">15.5$</div>
-      </div>
+      {items
+        .filter(item => item.selected)
+        .map(item => (
+          <div className="border-card extra">
+            <div className="name">{item.name}</div>
+            <div className="price">{item.price}</div>
+          </div>
+        ))}
     </Row>
   );
 };
 
-const ItemDetail = () => {
+const ItemDetail = ({ sizes, toppings, extras }) => {
+  const seletedSize = sizes.filter(size => size.selected)[0];
   return (
     <Row className="item-detail">
       <Row type="flex">
@@ -49,7 +42,7 @@ const ItemDetail = () => {
           <h3 className="cart-title">Size</h3>
         </Col>
         <Col span={18}>
-          <h2 className="cart-title-size">Medium</h2>
+          <h4 className="cart-title-size">{`${seletedSize.name}`}</h4>
         </Col>
       </Row>
       <Row type="flex">
@@ -57,22 +50,32 @@ const ItemDetail = () => {
           <h3 className="cart-title">Toppings</h3>
         </Col>
         <Col span={18} className="name-qty-grp">
-          <Topping />
+          {toppings &&
+          toppings.filter(topping => topping.selected).length > 0 ? (
+            <Topping items={toppings} />
+          ) : (
+            <h3>There is no topping</h3>
+          )}
         </Col>
       </Row>
+
       <Row type="flex">
         <Col span={6}>
           <h3 className="cart-title">Extra</h3>
         </Col>
         <Col span={18} className="name-qty-grp">
-          <Extra />
+          {extras && extras.filter(extra => extra.selected).length > 0 ? (
+            <Extra items={extras} />
+          ) : (
+            <h3>There is no extra</h3>
+          )}
         </Col>
       </Row>
     </Row>
   );
 };
 
-const Item = ({ item }) => {
+const Item = ({ qty, total, details }) => {
   const [openItem, setOpenItem] = useState(false);
   const handleOpenItemDetail = event => {
     setOpenItem(!openItem);
@@ -81,11 +84,11 @@ const Item = ({ item }) => {
     <Row>
       <Row className="item" type="flex">
         <Col span={4}>
-          <img src="//static.vietnammm.com/images/restaurants/vn/5QPOR5N/products/lasagna-alla-bolognese.png" />
+          <img src={details.imgUrl} />
         </Col>
         <Col span={4} className="txt-center">
           <div>
-            <span className="qty">{item.qty}x</span>
+            <span className="qty">{qty}x</span>
           </div>
           <div onClick={handleOpenItemDetail}>
             {openItem ? (
@@ -102,7 +105,7 @@ const Item = ({ item }) => {
         <Col span={16} className="name-qty-grp">
           <Row type="flex" justify="space-between">
             <Col span={22}>
-              <span className="name">{item.name}</span>
+              <span className="name">{details.name}</span>
             </Col>
             <Col span={2} className="content-right">
               <Badge count={<Icon type="minus-circle" />}></Badge>
@@ -110,26 +113,30 @@ const Item = ({ item }) => {
           </Row>
           <Row>
             <Col className="txt-center">
-              <div className="btn-total-item">$15.55</div>
+              <div className="btn-total-item">{total}</div>
             </Col>
           </Row>
         </Col>
       </Row>
-      {openItem ? <ItemDetail /> : null}
+      {openItem ? <ItemDetail {...details} /> : null}
     </Row>
   );
 };
-const GroupedItems = ({ name, total, items }) => {
+const GroupedItems = ({ name, items }) => {
   return (
     <Row>
       <Row className="title-row" type="flex" justify="space-between">
         <Col className={`category ${items.length === 0 ? "disable" : ""}`}>
           {name}
         </Col>
-        <Col className="total">{total}</Col>
+        <Col className="total">
+          {`${items.reduce((total, curValue) => {
+            return total + curValue.qty;
+          }, 0)} items`}
+        </Col>
       </Row>
       {items.map(item => (
-        <Item item={item} />
+        <Item {...item} />
       ))}
     </Row>
   );
@@ -174,33 +181,15 @@ const CartBottom = withRouter(props => (
   </Row>
 ));
 export class OrderCart extends Component {
-  closeCart = event => {};
+  // closeCart = event => {};
 
   render() {
-    let items = [
-      {
-        name: "Penne alla Arrabiata",
-        qty: 1,
-        img: ""
-      },
-      {
-        name: "Spaghetti alla Puttanesca",
-        qty: 5,
-        img: ""
-      },
-      {
-        name: "Spaghetti Vittorio",
-        qty: 5,
-        img: ""
-      }
-    ];
-
     return (
       <Drawer width={"25em"} closable={false} visible={this.props.visible}>
         <div className="order-cart">
           <Row className="cart-header" type="flex" align="middle">
             <Col className="title" span={12}>
-              Oder Status
+              Order Status
             </Col>
             <Col className="nav-back" span={12} onClick={this.props.onClose}>
               Hide <Icon type="arrow-right" />
@@ -209,11 +198,11 @@ export class OrderCart extends Component {
           <Row className="cart-content">
             <Timeline>
               <Timeline.Item>
-                <GroupedItems name="Ordered" total="15 items" items={items} />
+                <GroupedItems name="Ordered" items={this.props.orders} />
               </Timeline.Item>
-              <Timeline.Item>
+              {/* <Timeline.Item>
                 <GroupedItems name="Baking" total="15 items" items={items} />
-              </Timeline.Item>
+              </Timeline.Item> */}
               <Timeline.Item>
                 <GroupedItems name="Finishing" total="" items={[]} />
               </Timeline.Item>
@@ -230,4 +219,16 @@ export class OrderCart extends Component {
     );
   }
 }
-export default withRouter(OrderCart);
+function mapStateToProps({ orders }) {
+  console.log(orders);
+  const results = orders.reduce((total, currentValue) => {
+    total[currentValue.details._id] = total[currentValue.details._id] || [];
+    total[currentValue.details._id].push(currentValue);
+    return total;
+  }, Object.create(null));
+  console.log("this is a result from group items", results);
+  return {
+    orders
+  };
+}
+export default connect(mapStateToProps)(withRouter(OrderCart));
