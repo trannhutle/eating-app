@@ -6,8 +6,7 @@ import { SizeSelections, ToppingSelections } from "../ui/Input";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
 import { handleFetchFoodDetail } from "../../actions/foodDetails";
-import { relativeTimeRounding } from "moment";
-import { round } from "../../utils/appUtils";
+import { handleAddNewOrder } from "../../actions/orders";
 export class Detail extends Component {
   state = {
     qty: 1,
@@ -125,7 +124,11 @@ export class Detail extends Component {
             />
           </Row>
           <Row style={{ marginTop: "1em" }}>
-            <OrderBtn />
+            <OrderBtn
+              onClick={() => {
+                this.props.dispatch(handleAddNewOrder(this.state));
+              }}
+            />
           </Row>
         </Col>
       </Row>

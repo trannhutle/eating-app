@@ -7,7 +7,7 @@ import "./button.scss";
 const INCREASE = "INCREASE";
 const DECREASE = "DECREASE";
 
-export const ViewCardBtn = props => {
+export const ViewCardBtn = ({ totalItems }) => {
   const [visible, setVisible] = useState(false);
   const openCart = e => {
     console.log("calll this function");
@@ -21,16 +21,30 @@ export const ViewCardBtn = props => {
       <Button className="btn-view-card" onClick={openCart}>
         <Icon type="gift" />
         Order Status
-        <span className="count">50</span>
+        <span className="count">{totalItems}</span>
       </Button>
       <OrderCart visible={visible} onClose={closeCart} />
     </div>
   );
 };
-
-export const OrderBtn = ({ props }) => {
-  return <button className="btn btn-order">Place Order</button>;
+ViewCardBtn.propsTypes = {
+  totalItems: PropsTypes.number
 };
+ViewCardBtn.defaultProps = {
+  totalItems: 0
+};
+
+export const OrderBtn = ({ onClick }) => {
+  return (
+    <button onClick={onClick} className="btn btn-order">
+      Place Order
+    </button>
+  );
+};
+OrderBtn.propsTypes = {
+  onClick: PropsTypes.func
+};
+
 export const CloseTableBtn = ({ onClick }) => {
   return (
     <button onClick={onClick} className="btn btn-order">

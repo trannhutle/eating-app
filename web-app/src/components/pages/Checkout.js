@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Row, Input, Col, Icon } from "antd";
 import { PayNowBtn } from "../ui/Buttons";
-import Layout from "../Layout";
+import Layout from "../layouts/Layout";
 const CC = "CC";
 const APPLE_PAY = "APPLE_PAY";
 const PAY_AT_COUNTER = "PAY_AT_COUNTER";

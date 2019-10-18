@@ -3,10 +3,9 @@ import { Menu, Icon, Row, Col } from "antd";
 import { ViewCardBtn, PayNowBtn } from "../ui/Buttons";
 import { connect } from "react-redux";
 import CardList from "../foods/CardList";
-import Layout from "../Layout";
+import Layout from "../layouts/Layout";
 import { FoodCatMenu, FoodCategoryFilters } from "../ui/Lists";
 import { handleFetchFood } from "../../actions/foods";
-import LoadingBar from "react-redux-loading";
 const foodCatListServ = [
   {
     id: "cat-01",
@@ -55,7 +54,6 @@ class Home extends Component {
       }
     };
     return (
-      
       <Layout>
         <div className="wrapper">
           <div className="sider">

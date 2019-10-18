@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Detail from "../foods/Detail";
-import Layout from "../Layout";
+import Layout from "../layouts/Layout";
 
 function FoodDetail(props) {
   console.log("render is called");

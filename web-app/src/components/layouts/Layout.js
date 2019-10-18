@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Header } from "./layouts/Header";
+import { Header } from "./Header";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
 import LoadingBar from "react-redux-loading";
@@ -19,9 +19,14 @@ export class Layout extends Component {
     );
   }
 }
-function mapPropToState({ loadings }) {
+function mapPropToState({ loadings, orders }) {
+  console.log("loadings", loadings);
+  const totalItems = orders.reduce((total, currentValue) => {
+    return total + currentValue.qty;
+  }, 0);
   return {
-    loading: loadings
+    loadings,
+    totalItems
   };
 }
 

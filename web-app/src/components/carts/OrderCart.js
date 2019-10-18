@@ -46,15 +46,15 @@ const ItemDetail = () => {
     <Row className="item-detail">
       <Row type="flex">
         <Col span={6}>
-          <h5 className="cart-title">Size</h5>
+          <h3 className="cart-title">Size</h3>
         </Col>
         <Col span={18}>
-          <h5 className="cart-title-size">Medium</h5>
+          <h2 className="cart-title-size">Medium</h2>
         </Col>
       </Row>
       <Row type="flex">
         <Col span={6}>
-          <h5 className="cart-title">Toppings</h5>
+          <h3 className="cart-title">Toppings</h3>
         </Col>
         <Col span={18} className="name-qty-grp">
           <Topping />
@@ -62,7 +62,7 @@ const ItemDetail = () => {
       </Row>
       <Row type="flex">
         <Col span={6}>
-          <h5 className="cart-title">Extra</h5>
+          <h3 className="cart-title">Extra</h3>
         </Col>
         <Col span={18} className="name-qty-grp">
           <Extra />
@@ -88,7 +88,15 @@ const Item = ({ item }) => {
             <span className="qty">{item.qty}x</span>
           </div>
           <div onClick={handleOpenItemDetail}>
-            {openItem ? <Icon type="up-circle" /> : <Icon type="down-circle" />}
+            {openItem ? (
+              <Icon
+                className="expand-icon"
+                type="down-circle"
+                theme="outlined"
+              />
+            ) : (
+              <Icon className="expand-icon" type="up-circle" theme="filled" />
+            )}
           </div>
         </Col>
         <Col span={16} className="name-qty-grp">

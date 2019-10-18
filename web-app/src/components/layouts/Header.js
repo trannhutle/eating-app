@@ -1,9 +1,12 @@
-import React, { useEffect, Component } from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Row, Col, Icon } from "antd";
 import { ViewCardBtn } from "../ui/Buttons";
+import { withRouter } from "react-router";
 
 export class Header extends Component {
   render() {
+    console.log("Header is rendered", this);
     const { match, history } = this.props;
     return match.url === "/" ? (
       ""
@@ -21,12 +24,11 @@ export class Header extends Component {
         </Col>
         {match.url !== "/checkout" ? (
           <Col span={6} offset={12}>
-            <ViewCardBtn />
+            <ViewCardBtn totalItems={this.props.totalItems} />
           </Col>
         ) : null}
       </Row>
     );
   }
 }
-
 export default Header;
