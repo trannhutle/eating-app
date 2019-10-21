@@ -18,41 +18,44 @@ const foodCatListServ = [
     isActive: false
   }
 ];
-const foodCaFilterListServ = [
-  {
-    id: "cat-filt-01",
-    name: "Vegitarian",
-    isActive: false
-  },
-  {
-    id: "cat-filt-02",
-    name: "Vegan",
-    isActive: false
-  },
-  {
-    id: "cat-filt-03",
-    name: "Spicy",
-    isActive: false
-  }
-];
 
 class Home extends Component {
+  state = {
+    listFood: []
+  };
   componentDidMount() {
-    this.props.dispatch(handleFetchFood());
+    console.log("call the component did mount of Home");
+    this.props.handleFetchFood();
+  }
+  // useEffect(() => {
+  //   setState({listFood: this.props.foods})
+  //   // return () => {
+  //   //   cleanup
+  //   // };
+  // }, [this.props.foods])
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.foods !== this.props.foods) {
+      this.setState({ listFood: nextProps.foods });
+    }
   }
   render() {
-    const { foods } = this.props;
-
     const onSelectCat = catId => {
       {
         console.log("This is onSelectCat: ", catId);
       }
     };
-    const onSelectFilter = filterId => {
+    const onSelectFilter = filterName => {
       {
-        console.log("This is onSelectFilter: ", filterId);
+        console.log("This is onSelectFilter: ", filterName);
+        const fiteredFoods = this.props.foods.filter(food => {
+          return food.tags.some(tag => {
+            if (tag.name === filterName) return true;
+          });
+        });
+        this.setState({ listFood: fiteredFoods });
       }
     };
+
     return (
       <Layout>
         <div className="wrapper">
@@ -64,7 +67,7 @@ class Home extends Component {
             <Row type="flex" align="middle">
               <Col span={18}>
                 <FoodCategoryFilters
-                  foodFilterList={foodCaFilterListServ}
+                  foodFilterList={this.props.tagFilters}
                   onSelect={onSelectFilter}
                 />
               </Col>
@@ -75,7 +78,7 @@ class Home extends Component {
           </div>
           <div className="content">
             <h1 className="category">Pizza</h1>
-            <CardList />
+            <CardList foods={this.state.listFood} />
           </div>
         </div>
       </Layout>
@@ -83,9 +86,29 @@ class Home extends Component {
   }
 }
 
-// const mapStateToProps = ({}) => {
-//   return {};
-// };
-// const mapDispatchToProps = { handleFetchFood };
+const mapStateToProps = ({ foods }) => {
+  const tagFilters = [];
+  foods.map(food => {
+    food.tags.map(tag => {
+      // find dupplicate one
+      const isDupplicated = tagFilters.some(filter => {
+        if (tag.name === filter.name) {
+          return true;
+        }
+      });
+      if (!isDupplicated) {
+        tagFilters.push({ id: tag._id, name: tag.name });
+      }
+    });
+  });
+  console.log("this is the tag from Home: ", [...tagFilters]);
+  return { foods, tagFilters };
+};
+const mapDispatchToProps = {
+  handleFetchFood
+};
 
-export default connect()(Home);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);

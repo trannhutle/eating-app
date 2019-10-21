@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Menu, Icon, Row } from "antd";
 import "./lists.scss";
 export const FoodCatMenu = ({ foodCatList, onSelect }) => {
@@ -29,10 +29,16 @@ export const FoodCatMenu = ({ foodCatList, onSelect }) => {
   );
 };
 
-export const FoodCategoryFilters = ({ foodFilterList, onSelect }) => {
-  const [filterList, setCatList] = useState(foodFilterList);
+export const FoodCategoryFilters = ({ foodFilterList = [], onSelect }) => {
+  console.log("this is the result", foodFilterList);
+  const [filterList, setCatList] = useState([]);
   const [curItem, setCurItem] = useState("-1");
 
+  useEffect(() => {
+    if (filterList.length === 0 && foodFilterList.length > 0) {
+      setCatList(foodFilterList);
+    }
+  }, [foodFilterList]);
   return (
     <div>
       <Row>
@@ -43,21 +49,21 @@ export const FoodCategoryFilters = ({ foodFilterList, onSelect }) => {
           className="filter"
           onClick={e => {
             if (e.target.tagName.toUpperCase() === "LI") {
-              const id = e.target.dataset.key;
+              const name = e.target.dataset.keyName;
               const updateList = filterList.map(i =>
-                i.id !== id
+                i.name !== name
                   ? Object.assign({}, i, { isActive: false })
                   : Object.assign({}, i, { isActive: !i.isActive })
               );
               setCatList(updateList);
-              onSelect(id);
+              onSelect(name);
             }
           }}
         >
           {filterList.map(item => (
             <li
               key={item.id}
-              data-key={item.id}
+              data-key-name={item.name}
               className={item.isActive ? "active" : ""}
             >
               #{item.name}

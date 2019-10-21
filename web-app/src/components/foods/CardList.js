@@ -3,20 +3,14 @@ import FoodCard from "./FoodCard";
 import { Row } from "antd";
 import { connect } from "react-redux";
 
-export const CardList = props => {
+export const CardList = ({ foods }) => {
   console.log(this);
-  const foodList = props.foods;
   return (
     <Row className="card-container">
-      {foodList.map(food => (
+      {foods.map(food => (
         <FoodCard key={food._id} food={food} />
       ))}
     </Row>
   );
 };
-function mapStateToProps({ foods }) {
-  return {
-    foods
-  };
-}
-export default connect(mapStateToProps)(CardList);
+export default CardList;
