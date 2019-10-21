@@ -61,7 +61,7 @@ class Home extends Component {
             <FoodCatMenu foodCatList={foodCatListServ} onSelect={onSelectCat} />
           </div>
           <div className="header">
-            <Row type="flex" align="bottom">
+            <Row type="flex" align="middle">
               <Col span={18}>
                 <FoodCategoryFilters
                   foodFilterList={foodCaFilterListServ}

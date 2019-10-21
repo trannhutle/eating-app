@@ -117,11 +117,17 @@ export class Detail extends Component {
             handleUpdate={this.handleUpdatedExtras}
           />
           <Row type="flex" align="middle" className="mt-2">
-            <span className="total-price">${this.state.total.toFixed(2)}</span>
-            <SpinBox
-              value={this.state.qty}
-              onChange={this.handleChangeQuanity}
-            />
+            <Col span={10}>
+              <span className="total-price">
+                ${this.state.total.toFixed(2)}
+              </span>
+            </Col>
+            <Col>
+              <SpinBox
+                value={this.state.qty}
+                onChange={this.handleChangeQuanity}
+              />
+            </Col>
           </Row>
           <Row style={{ marginTop: "1em" }}>
             <OrderBtn

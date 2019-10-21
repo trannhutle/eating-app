@@ -8,6 +8,12 @@
   font-weight: $fw-bold;
   background-color: $color-dark-brow;
   color: $color-white;
+
+  &.onChange {
+    background-color: $color-dark-brow;
+    transition-property: background-color 3s;
+    transition-duration: 3s;
+  }
   .count {
     margin-left: 10px;
     border-radius: 50%;
@@ -17,7 +23,27 @@
     width: 1.5em;
     height: 1.5em;
   }
+  &.hover {
+    background-color: $color-white;
+    color: $color-dark-brow;
+  }
 }
+
+/* starting ENTER animation */
+.btn-onchange-enter {
+  border: 1px solid;
+  animation-name: spin;
+  animation-duration: 250ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  transition: all 250ms ease-in-out;
+}
+
+/* ending ENTER animation */
+.btn-onchange-enter-active {
+  transition: all 1000ms ease-in-out;
+}
+
 .btn {
   display: inline-block;
   cursor: pointer;
@@ -26,7 +52,7 @@
   border: none;
   &.btn-order {
     border-radius: 35px;
-    padding: 1.0em 2.5em;
+    padding: 1em 2.5em;
     background-color: $color-yellow;
     color: $color-dark-brow;
   }
@@ -53,5 +79,15 @@
     font-weight: 900;
     font-size: $fs-h3;
     text-align: center;
+  }
+}
+@keyframes spin {
+  from {
+    // transform: rotate(0deg) scale(1.3);
+    transform: scale(1.3);
+  }
+  to {
+    // transform: rotate(360deg) scale(1.3);
+    transform: scale(1.3);
   }
 }

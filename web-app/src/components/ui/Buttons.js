@@ -1,27 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Icon, Button } from "antd";
 import PropsTypes from "prop-types";
 import OrderCart from "../carts/OrderCart";
 import "./button.scss";
-
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 const INCREASE = "INCREASE";
 const DECREASE = "DECREASE";
 
 export const ViewCardBtn = ({ totalItems }) => {
   const [visible, setVisible] = useState(false);
+  const [hasChanged, setHasChanged] = useState(null);
   const openCart = e => {
     console.log("calll this function");
     setVisible(true);
   };
-  const closeCart = event => {
+  const closeCart = e => {
     setVisible(false);
   };
+  // use effect to listen to the change of totalItems. to render the animation
+  useEffect(() => {
+    console.log("There is a change of button value");
+    // not change animation when init the header
+    if (hasChanged === null) setHasChanged(false);
+    else {
+      setHasChanged(true);
+      setTimeout(() => {
+        setHasChanged(false);
+      }, 1000);
+    }
+  }, [totalItems]);
   return (
     <div>
-      <Button className="btn-view-card" onClick={openCart}>
+      <Button
+        className={`btn-view-card ${hasChanged ? "hover" : ""}`}
+        onClick={openCart}
+      >
         <Icon type="gift" />
         Order Status
-        <span className="count">{totalItems}</span>
+        <CSSTransition in={hasChanged} timeout={1000} classNames="btn-onchange">
+          <span className="count">{totalItems}</span>
+        </CSSTransition>
       </Button>
       <OrderCart visible={visible} onClose={closeCart} />
     </div>

@@ -1,10 +1,18 @@
 import { create } from "domain";
-
+import uuid from "react-uuid";
 export const ADD_ORDER = "ADD_ORDER";
+export const UPDATE_ORDER = "UPDATE_ORDER";
 
 function addNewOrder(food) {
   return {
     type: ADD_ORDER,
+    food
+  };
+}
+function updateOrder(id, food) {
+  return {
+    type: UPDATE_ORDER,
+    id,
     food
   };
 }
@@ -13,42 +21,50 @@ export function handleAddNewOrder(food) {
   console.log(food);
   return (dispatch, getState) => {
     const { orders } = getState();
-    const props = ["toppings", "extras"];
-    const groups = orders
+    const props = ["sizes", "toppings", "extras"];
+    const dupplicatedOrder = orders
       .filter(order => order.details._id === food.details._id)
-      .reduce((dupplicateOrder, currentOrder) => {
-        // check if new order has same size
-        const selectedSize = food.details.sizes.filter(
-          size => size.selected
-        )[0];
-        if (
-          currentOrder.details.sizes.filter(size => size.selected)[0]._id !==
-          selectedSize._id
-        ) {
-          return null;
+      .filter(currOrder => {
+        if (!isNewFoodDistinct(props, currOrder, food)) {
+          console.log("we found dupplicated", currOrder);
+          return true;
+        } else {
+          console.log("GO to else on reduce", currOrder);
         }
-        const oldSelectedItems = currentOrder.details.toppings
-          .filter(item => item.selected)
-          .map(item => {
-            return item._id;
-          });
-        const newSelectedItems = food.details.toppings
-          .filter(item => item.selected)
-          .map(item => {
-            return item._id;
-          });
-        // check is dupplicate
-        if (
-          oldSelectedItems.length !== newSelectedItems.length ||
-          oldSelectedItems.sort().every((value, index) => {
-            return value !== newSelectedItems.sort()[index];
-          })
-        )
-          return null;
-        return currentOrder;
-        // Get selected [toppings and extra in detail] -> compare
-      }, Object.create(null));
-    console.log("this is the information from aaaa", groups);
-    dispatch(addNewOrder(food));
+      });
+    console.log("this is the information from aaaa", dupplicatedOrder);
+    if (dupplicatedOrder.length > 0) {
+      dispatch(updateOrder(dupplicatedOrder[0].id, food));
+    } else {
+      dispatch(addNewOrder(Object.assign({}, food, { id: uuid() })));
+    }
   };
 }
+
+const isNewFoodDistinct = (props, oldFood, newFood) => {
+  const isOrderedFoodDistinct = props.some(attribute => {
+    const oldSelectedItems = oldFood.details[attribute]
+      .filter(item => item.selected)
+      .map(item => {
+        return item._id;
+      });
+    const newSelectedItems = newFood.details[attribute]
+      .filter(item => item.selected)
+      .map(item => {
+        return item._id;
+      });
+
+    console.log("Get the attribute: ", attribute);
+    // check is dupplicate
+    if (
+      oldSelectedItems.length !== newSelectedItems.length ||
+      (oldSelectedItems.length > 0 &&
+        oldSelectedItems.sort().every((value, index) => {
+          return value !== newSelectedItems.sort()[index];
+        }))
+    ) {
+      return true;
+    }
+  });
+  return isOrderedFoodDistinct;
+};
