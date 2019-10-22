@@ -8,6 +8,7 @@ function App() {
   return (
     <Router>
       <Route exact={true} path="/" component={Home} />
+      <Route path="/cat/:catId" component={Home} />
       <Route path="/product/:productId" component={FoodDetail} />
       <Route path="/checkout" component={Checkout} />
     </Router>

@@ -1,16 +1,87 @@
-import React from "react";
+import React, { Component } from "react";
 import FoodCard from "./FoodCard";
-import { Row } from "antd";
-import { connect } from "react-redux";
+import { DEFAULT_FILTER_NONE } from "../ui/Lists";
+import { Row, Col } from "antd";
+import { ViewCardBtn, PayNowBtn } from "../ui/Buttons";
+import { FoodCategoryFilters } from "../ui/Lists";
 
-export const CardList = ({ foods }) => {
-  console.log(this);
-  return (
-    <Row className="card-container">
-      {foods.map(food => (
-        <FoodCard key={food._id} food={food} />
-      ))}
-    </Row>
-  );
+export class CardList extends Component {
+  state = {
+    listFood: [],
+    tagFilters: []
+  };
+  constructor() {
+    super();
+    this.onSelectFilter = this.onSelectFilter.bind(this);
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.foods !== this.props.foods) {
+      this.setState({
+        listFood: nextProps.foods,
+        tagFilters: getFilterList(nextProps.foods)
+      });
+    }
+  }
+  onSelectFilter = filterName => {
+    {
+      console.log("This is onSelectFilter: ", filterName);
+      if (DEFAULT_FILTER_NONE === filterName) {
+        this.setState({ listFood: this.props.foods });
+      } else {
+        const fiteredFoods = this.props.foods.filter(food => {
+          return food.tags.some(tag => {
+            if (tag.name === filterName) return true;
+          });
+        });
+        this.setState({ listFood: fiteredFoods });
+      }
+    }
+  };
+  render() {
+    return (
+      <div>
+        <div className="header">
+          <Row type="flex" align="middle">
+            <Col span={18}>
+              <FoodCategoryFilters
+                foodFilterList={this.state.tagFilters}
+                onSelect={this.onSelectFilter}
+              />
+            </Col>
+            <Col span={6}>
+              <ViewCardBtn />
+            </Col>
+          </Row>
+        </div>
+        <div className="content">
+          <h1 className="category">Pizza</h1>
+          <Row className="card-container">
+            {this.state.listFood.map(food => (
+              <FoodCard key={food._id} food={food} />
+            ))}
+          </Row>
+        </div>
+      </div>
+    );
+  }
+}
+
+const getFilterList = foods => {
+  const tagFilters = [];
+  foods.map(food => {
+    food.tags.map(tag => {
+      // find dupplicate one
+      const isDupplicated = tagFilters.some(filter => {
+        if (tag.name === filter.name) {
+          return true;
+        }
+      });
+      if (!isDupplicated) {
+        tagFilters.push({ id: tag._id, name: tag.name });
+      }
+    });
+  });
+  return tagFilters;
 };
+
 export default CardList;

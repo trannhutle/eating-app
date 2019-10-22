@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const foodServices = require("../services/foodServices");
+const foodServices = require("../services/food");
 
 /* GET home page. */
 router.get("/", function(req, res, next) {
@@ -20,5 +20,14 @@ router.get("/detail", (req, res, next) => {
       title: "Missing food id"
     });
   }
+});
+
+router.get("/cat", (req, res, next) => {
+  const cat = req.query.cat;
+  const page = req.query.page;
+
+  foodServices.getFoods(req, res, foodCats => {
+    return res.status(200).json(foodCats);
+  });
 });
 module.exports = router;

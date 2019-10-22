@@ -40,7 +40,7 @@ const foodSchema = Schema({
   ],
   createDate: { type: Date, default: Date.now() },
   updatedDate: { type: Date, default: Date.now() },
-  category: { type: Schema.Types.ObjectId, ref: "FoodCat" }
+  category: [{ type: Schema.Types.ObjectId, ref: "FoodCat" }]
 });
 
 module.exports = mongoose.model("Food", foodSchema);

@@ -6,34 +6,42 @@ const ObjectId = require("mongoose").Types.ObjectId;
 
 const foodCat1 = new FoodCat({
   _id: new ObjectId(),
-  name: "Pizza"
+  name: "Pizza",
+  isPinned: false
 });
 const foodCat2 = new FoodCat({
   _id: new ObjectId(),
-  name: "Spaghetti"
+  name: "Spaghetti",
+  isPinned: false
 });
 const foodCat3 = new FoodCat({
   _id: new ObjectId(),
-  name: "Maincourses"
+  name: "Maincourses",
+  isPinned: false
+});
+const foodCat4 = new FoodCat({
+  _id: new ObjectId(),
+  name: "BestSeller",
+  isPinned: true
 });
 
-const foodTag1 = new FoodCat({
+const foodTag1 = new FoodTag({
   _id: new ObjectId(),
   name: "Vegan"
 });
-const foodTag2 = new FoodCat({
+const foodTag2 = new FoodTag({
   _id: new ObjectId(),
   name: "Vegitarian"
 });
-const foodTag3 = new FoodCat({
+const foodTag3 = new FoodTag({
   _id: new ObjectId(),
   name: "Seafood"
 });
-const foodTag4 = new FoodCat({
+const foodTag4 = new FoodTag({
   _id: new ObjectId(),
   name: "White meat"
 });
-const foodTag5 = new FoodCat({
+const foodTag5 = new FoodTag({
   _id: new ObjectId(),
   name: "Red meat"
 });
@@ -100,7 +108,7 @@ const food = new Food({
     }
   ],
   tags: [foodTag3._id],
-  category: foodCat2._id
+  category: [foodCat2._id, foodCat4]
 });
 
 const food1 = new Food({
@@ -152,7 +160,7 @@ const food1 = new Food({
     {
       name: "Seafood",
       selected: false,
-      price: 5,
+      price: 5
     },
     {
       name: "Spaghetti",
@@ -166,7 +174,7 @@ const food1 = new Food({
     }
   ],
   tags: [foodTag1._id],
-  category: foodCat1._id
+  category: [foodCat1._id, foodCat4]
 });
 
 const food2 = new Food({
@@ -224,8 +232,8 @@ const food2 = new Food({
       price: 2.5
     }
   ],
-  category: foodCat1._id,
-  tags: [foodTag2._id, foodTag1._id]
+  category: [foodCat1._id, foodCat4],
+  tags: [foodTag1._id]
 });
 
 const food3 = new Food({
@@ -283,8 +291,8 @@ const food3 = new Food({
       price: 2.5
     }
   ],
-  category: foodCat1._id,
-  tags: [foodTag3._id]
+  tags: [foodTag2._id],
+  category: [foodCat3._id, foodCat4]
 });
 
 const food4 = new Food({
@@ -332,8 +340,8 @@ const food4 = new Food({
       price: 2.5
     }
   ],
-  category: foodCat2._id,
-  tags: [foodTag1._id, foodTag2._id]
+  tags: [foodTag1._id, foodTag2._id],
+  category: [foodCat2._id, foodCat4]
 });
 
 const food5 = new Food({
@@ -380,8 +388,8 @@ const food5 = new Food({
       price: 2.5
     }
   ],
-  category: foodCat2._id,
-  tags: [foodTag1._id, foodTag2._id]
+  tags: [foodTag1._id, foodTag2._id],
+  category: [foodCat2._id, foodCat4]
 });
 
 const food6 = new Food({
@@ -429,8 +437,8 @@ const food6 = new Food({
       price: 2.5
     }
   ],
-  category: foodCat2._id,
-  tags: [foodTag3._id]
+  tag: [foodTag3._id],
+  category: [foodCat3._id, foodCat4]
 });
 
 const food7 = new Food({
@@ -481,8 +489,8 @@ const food7 = new Food({
       price: 2.5
     }
   ],
-  category: foodCat3._id,
-  tags: [foodTag4._id]
+  tags: [foodTag4._id],
+  category: [foodCat3._id, foodCat4]
 });
 const food8 = new Food({
   _id: new ObjectId(),
@@ -533,7 +541,7 @@ const food8 = new Food({
       price: 2.5
     }
   ],
-  category: foodCat3._id,
+  category: [foodCat3._id, foodCat4],
   tags: [foodTag5._id]
 });
 
@@ -586,28 +594,31 @@ const food9 = new Food({
       price: 2.5
     }
   ],
-  category: foodCat3._id,
+  category: [foodCat3._id, foodCat4],
   tags: [foodTag3._id, foodTag5._id]
 });
 
-FoodCat.create([foodCat1, foodCat2, foodCat3, foodTag4, foodTag5], err => {
+FoodCat.create([foodCat1, foodCat2, foodCat3, foodCat4], err => {
   if (err) {
     console.error("An error is occured", err);
     return;
   }
-  FoodTag.create([foodTag1, foodTag2, foodTag3], foodTagErr => {
-    if (foodTagErr) {
-      console.error("An error is occured", foodTagErr);
-      return;
-    }
-    Food.create(
-      [food, food1, food2, food3, food4, food5, food6, food7, food8, food9],
-      foodErr => {
-        if (foodErr) {
-          console.error("An error is occured", foodErr);
-          return;
-        }
+  FoodTag.create(
+    [foodTag1, foodTag2, foodTag3, foodTag4, foodTag5],
+    foodTagErr => {
+      if (foodTagErr) {
+        console.error("An error is occured", foodTagErr);
+        return;
       }
-    );
-  });
+      Food.create(
+        [food, food1, food2, food3, food4, food5, food6, food7, food8, food9],
+        foodErr => {
+          if (foodErr) {
+            console.error("An error is occured", foodErr);
+            return;
+          }
+        }
+      );
+    }
+  );
 });

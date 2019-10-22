@@ -6,109 +6,62 @@ import CardList from "../foods/CardList";
 import Layout from "../layouts/Layout";
 import { FoodCatMenu, FoodCategoryFilters } from "../ui/Lists";
 import { handleFetchFood } from "../../actions/foods";
-const foodCatListServ = [
-  {
-    id: "cat-01",
-    name: "Pasta",
-    isActive: true
-  },
-  {
-    id: "cat-02",
-    name: "Sandwishes",
-    isActive: false
-  }
-];
+import { handleInitFetchData } from "../../actions/shared";
+import { DEFAULT_FILTER_NONE } from "../ui/Lists";
+import { withRouter } from "react-router";
 
 class Home extends Component {
-  state = {
-    listFood: []
-  };
+  constructor() {
+    super();
+    this.onSelectCat = this.onSelectCat.bind(this);
+  }
   componentDidMount() {
     console.log("call the component did mount of Home");
-    this.props.handleFetchFood();
-  }
-  // useEffect(() => {
-  //   setState({listFood: this.props.foods})
-  //   // return () => {
-  //   //   cleanup
-  //   // };
-  // }, [this.props.foods])
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.foods !== this.props.foods) {
-      this.setState({ listFood: nextProps.foods });
+    this.props.handleInitFetchData();
+    const { match } = this.props;
+    if (match.params.catId) {
+      console.log("Load the category information");
     }
   }
+  onSelectCat = catId => {
+    {
+      console.log("handleFetchFood", catId);
+      this.props.handleFetchFood(catId, 0);
+    }
+  };
   render() {
-    const onSelectCat = catId => {
-      {
-        console.log("This is onSelectCat: ", catId);
-      }
-    };
-    const onSelectFilter = filterName => {
-      {
-        console.log("This is onSelectFilter: ", filterName);
-        const fiteredFoods = this.props.foods.filter(food => {
-          return food.tags.some(tag => {
-            if (tag.name === filterName) return true;
-          });
-        });
-        this.setState({ listFood: fiteredFoods });
-      }
-    };
-
     return (
       <Layout>
         <div className="wrapper">
           <div className="sider">
             <div className="logo">VITTORIO</div>
-            <FoodCatMenu foodCatList={foodCatListServ} onSelect={onSelectCat} />
+            <FoodCatMenu
+              foodCatList={this.props.cats}
+              onSelect={this.onSelectCat}
+            />
           </div>
-          <div className="header">
-            <Row type="flex" align="middle">
-              <Col span={18}>
-                <FoodCategoryFilters
-                  foodFilterList={this.props.tagFilters}
-                  onSelect={onSelectFilter}
-                />
-              </Col>
-              <Col span={6}>
-                <ViewCardBtn />
-              </Col>
-            </Row>
-          </div>
-          <div className="content">
-            <h1 className="category">Pizza</h1>
-            <CardList foods={this.state.listFood} />
-          </div>
+          <CardList foods={this.props.foods} />
         </div>
       </Layout>
     );
   }
 }
 
-const mapStateToProps = ({ foods }) => {
-  const tagFilters = [];
-  foods.map(food => {
-    food.tags.map(tag => {
-      // find dupplicate one
-      const isDupplicated = tagFilters.some(filter => {
-        if (tag.name === filter.name) {
-          return true;
-        }
-      });
-      if (!isDupplicated) {
-        tagFilters.push({ id: tag._id, name: tag.name });
-      }
+const mapStateToProps = ({ foods, categories }) => {
+  const cats = categories.map(cat => {
+    return Object.assign({}, cat, {
+      id: cat._id,
+      isActive: categories.filter(cat => cat.isPinned)[0]._id === cat._id
     });
   });
-  console.log("this is the tag from Home: ", [...tagFilters]);
-  return { foods, tagFilters };
+  return { foods, cats };
 };
 const mapDispatchToProps = {
-  handleFetchFood
+  handleFetchFood,
+  handleInitFetchData
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Home);
+)(withRouter(Home));

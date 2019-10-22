@@ -3,12 +3,13 @@ import { connect } from "react-redux";
 import { Row, Col, Icon } from "antd";
 import { ViewCardBtn } from "../ui/Buttons";
 import { withRouter } from "react-router";
+const catParamRegex = /^\/cat\//;
 
 export class Header extends Component {
   render() {
     console.log("Header is rendered", this);
     const { match, history } = this.props;
-    return match.url === "/" ? (
+    return match.url === "/" || catParamRegex.test(match.url) ? (
       ""
     ) : (
       <Row className="header">

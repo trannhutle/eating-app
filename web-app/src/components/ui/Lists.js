@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Menu, Icon, Row } from "antd";
 import "./lists.scss";
+export const DEFAULT_FILTER_NONE = "-1";
+
 export const FoodCatMenu = ({ foodCatList, onSelect }) => {
   const [catList, setCatList] = useState(foodCatList);
-
+  useEffect(() => {
+    if (catList.length === 0 && foodCatList.length > 0) {
+      setCatList(foodCatList);
+    }
+  }, [foodCatList]);
   return (
     <Menu
       onSelect={({ key }) => {
@@ -70,8 +76,8 @@ export const FoodCategoryFilters = ({ foodFilterList = [], onSelect }) => {
             </li>
           ))}
           <li
-            key="-1"
-            data-key="-1"
+            key={DEFAULT_FILTER_NONE}
+            data-key-name={DEFAULT_FILTER_NONE}
             className={
               filterList.filter(item => item.isActive).length === 0
                 ? "active"

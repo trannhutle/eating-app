@@ -5,6 +5,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const cors = require("cors");
 var foodsRouter = require("./routes/foods");
+var foodCatRouter = require("./routes/foodCat");
 require("./appSetting");
 
 var app = express();
@@ -22,6 +23,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/foods", foodsRouter);
+app.use("/cats", foodCatRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
