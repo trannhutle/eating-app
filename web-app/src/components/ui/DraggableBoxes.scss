@@ -1,0 +1,23 @@
+@import "../../styles/config.scss";
+
+.box {
+  position: absolute;
+  [type="checkbox"] {
+    opacity: 0;
+    position: absolute;
+  }
+}
+[type="checkbox"]:checked + label .custom-checkbox {
+  background: $color-dark-brow !important;
+  color: $color-white !important;
+}
+.custom-checkbox {
+  display: block;
+  background-color: $color-grey;
+  color: $color-red;
+  border: 1px solid;
+  cursor: pointer;
+  user-select: none;
+  height: 100%;
+  width: 100%;
+}

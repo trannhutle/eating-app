@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Radio } from "antd";
+
 import "./input.scss";
 
 export const SizeSelections = ({ options, handleUpdate }) => {
@@ -61,5 +63,32 @@ export const ToppingSelections = ({ options, handleUpdate }) => {
         </div>
       ))}
     </div>
+  );
+};
+
+export const RadioBtnsForBoxColor = ({ onChange, value }) => {
+  return (
+    <Radio.Group name="color" onChange={onChange} value={value}>
+      <Radio value={"yellow"}>
+        {" "}
+        <span className="square yellow"></span>Yellow
+      </Radio>
+      <Radio value={"red"}>
+        <span className="square red"></span> Red
+      </Radio>
+      <Radio value={"grey"}>
+        <span className="square grey"></span> Grey
+      </Radio>
+    </Radio.Group>
+  );
+};
+
+export const RadioBtns = ({ name, list, onChange, value }) => {
+  return (
+    <Radio.Group name={name} onChange={onChange} value={value}>
+      {list.map(item => (
+        <Radio value={item.value}> {item.name}</Radio>
+      ))}
+    </Radio.Group>
   );
 };

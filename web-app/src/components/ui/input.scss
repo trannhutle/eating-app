@@ -102,3 +102,18 @@
     text-transform: uppercase;
   }
 }
+
+.square {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  &.red {
+    background-color: $color-red;
+  }
+  &.yellow {
+    background-color: $color-yellow;
+  }
+  &.grey {
+    background-color: $color-grey;
+  }
+}

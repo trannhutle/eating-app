@@ -1,6 +1,6 @@
 import React, { Component, useState } from "react";
 import { Icon, Row, Col, Timeline, Badge, Drawer } from "antd";
-import { CloseTableBtn } from "../ui/Buttons";
+import { CloseTableBtn, ConfirmedOrder } from "../ui/Buttons";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
 import "./orderCart.scss";
@@ -171,7 +171,8 @@ const CartBottom = withRouter(props => (
       <span className="title">Total</span>
       <span className="price">$15.6</span>
     </Row>
-    <Row type="flex" justify="center">
+    <Row type="flex" align="middle" justify="center">
+      <ConfirmedOrder />
       <CloseTableBtn
         onClick={() => {
           props.history.push("/checkout");
@@ -198,16 +199,16 @@ export class OrderCart extends Component {
           <Row className="cart-content">
             <Timeline>
               <Timeline.Item>
-                <GroupedItems name="Ordered" items={this.props.orders} />
+                <GroupedItems name="New orders" items={this.props.orders} />
               </Timeline.Item>
-              {/* <Timeline.Item>
-                <GroupedItems name="Baking" total="15 items" items={items} />
-              </Timeline.Item> */}
+              <Timeline.Item>
+                <GroupedItems name="Confirmed" total="15 items" items={[]} />
+              </Timeline.Item>
               <Timeline.Item>
                 <GroupedItems name="Finishing" total="" items={[]} />
               </Timeline.Item>
               <Timeline.Item>
-                <GroupedItems name="Serve" total="" items={[]} />
+                <GroupedItems name="Served" total="" items={[]} />
               </Timeline.Item>
             </Timeline>
           </Row>

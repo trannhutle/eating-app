@@ -66,10 +66,19 @@ OrderBtn.propsTypes = {
 export const CloseTableBtn = ({ onClick }) => {
   return (
     <button onClick={onClick} className="btn btn-order">
-      Start to place order
+      Check out
     </button>
   );
 };
+
+export const ConfirmedOrder = ({ onClick }) => {
+  return (
+    <button onClick={onClick} className="btn btn-confirm">
+      Confirm
+    </button>
+  );
+};
+
 export const PayNowBtn = ({ props }) => {
   return <button className="btn btn-order">Pay Now</button>;
 };

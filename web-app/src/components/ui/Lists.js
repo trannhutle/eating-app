@@ -28,7 +28,7 @@ export const FoodCatMenu = ({ foodCatList, onSelect, onSelected }) => {
             : Object.assign({}, cat, { isActive: !cat.isActive })
         );
         setCatList(updatedList);
-        const secCat = catList.reduce((reCat, curCat) => {
+        const secCat = updatedList.reduce((reCat, curCat) => {
           const active = curCat.isActive ? curCat : reCat;
           return active;
         }, null);
@@ -102,5 +102,15 @@ export const FoodCategoryFilters = ({ foodFilterList = [], onSelect }) => {
         </ul>
       </Row>
     </div>
+  );
+};
+
+export const SelectedTableList = ({ data }) => {
+  return (
+    <ul className="filter">
+      {data.map(item => {
+        return <li className="active">{item.name}</li>;
+      })}
+    </ul>
   );
 };

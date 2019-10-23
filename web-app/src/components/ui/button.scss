@@ -61,6 +61,16 @@
     color: $color-dark-brow-hover;
     transition: $trans-normal;
   }
+  &.btn-confirm {
+    border-radius: 35px;
+    padding: 1em 2.5em;
+    background-color: $color-red;
+    color: $color-white;
+  }
+  &.btn-confirm:hover {
+    background-color: $color-red-hover;
+    transition: $trans-normal;
+  }
 }
 
 .spinbox {
