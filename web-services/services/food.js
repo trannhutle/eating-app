@@ -17,7 +17,10 @@ const getFoods = (req, res, next) => {
                 error: error
               });
             }
-            next(foods);
+            next({
+              catId: foodCat._id,
+              foodList: foods
+            });
           });
       });
     } catch (err) {
@@ -34,7 +37,10 @@ const getFoods = (req, res, next) => {
               error: error
             });
           }
-          next(foods);
+          next({
+            catId: cat,
+            foodList: foods
+          });
         });
     } catch (err) {
       console.error(err);

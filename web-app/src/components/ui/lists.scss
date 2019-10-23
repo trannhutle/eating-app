@@ -3,13 +3,14 @@ ul.filter {
   list-style-type: none;
   padding: 0;
   display: inherit;
+  width: 100%;
   li {
-    display: inline;
+    display: inline-block;
     text-transform: uppercase;
-    margin: 0 5px;
     padding: 0 5px;
     font-size: 0.8rem;
     cursor: pointer;
+    white-space: nowrap;
 
     &.active {
       border: 1.3px solid $color-grey;
@@ -21,6 +22,9 @@ ul.filter {
       //   border: none;
       //   font-weight: 400;
     }
+  }
+  li:first-child {
+    padding-left: 0;
   }
   li:hover {
     border: 1.3px solid $color-grey;

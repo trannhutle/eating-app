@@ -14,7 +14,7 @@ export function handleFetchFoodDetail(foodDetailId) {
   return (dispatch, getState) => {
     return new Promise((res, rej) => {
       const { foods } = getState();
-      if (foods.length === 0) {
+      if (foods === null) {
         let queryParams = new URLSearchParams({ id: foodDetailId }).toString();
         axios
           .get(`${LOAD_FOOD_DETAIL_API}?${queryParams}`)
@@ -29,7 +29,9 @@ export function handleFetchFoodDetail(foodDetailId) {
           });
         // load food detail from back-end
       } else {
-        const foodDetail = foods.filter(item => item._id === foodDetailId)[0];
+        const foodDetail = foods.list.filter(
+          item => item._id === foodDetailId
+        )[0];
         dispatch(fetchFoodDetail(foodDetail));
         res();
       }

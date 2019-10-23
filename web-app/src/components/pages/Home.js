@@ -4,13 +4,16 @@ import { ViewCardBtn, PayNowBtn } from "../ui/Buttons";
 import { connect } from "react-redux";
 import CardList from "../foods/CardList";
 import Layout from "../layouts/Layout";
-import { FoodCatMenu, FoodCategoryFilters } from "../ui/Lists";
+import { FoodCatMenu } from "../ui/Lists";
 import { handleFetchFood } from "../../actions/foods";
 import { handleInitFetchData } from "../../actions/shared";
 import { DEFAULT_FILTER_NONE } from "../ui/Lists";
 import { withRouter } from "react-router";
 
 class Home extends Component {
+  state = {
+    category: {}
+  };
   constructor() {
     super();
     this.onSelectCat = this.onSelectCat.bind(this);
@@ -23,11 +26,14 @@ class Home extends Component {
       console.log("Load the category information");
     }
   }
-  onSelectCat = catId => {
+  onSelectCat = cat => {
     {
-      console.log("handleFetchFood", catId);
-      this.props.handleFetchFood(catId, 0);
+      console.log("handleFetchFood", cat);
+      this.props.handleFetchFood(cat.id, 0);
     }
+  };
+  onSelectedCat = cat => {
+    this.setState({ category: cat });
   };
   render() {
     return (
@@ -38,9 +44,13 @@ class Home extends Component {
             <FoodCatMenu
               foodCatList={this.props.cats}
               onSelect={this.onSelectCat}
+              onSelected={this.onSelectedCat}
             />
           </div>
-          <CardList foods={this.props.foods} />
+          <CardList
+            foods={this.props.foods}
+            catName={this.state.category.name}
+          />
         </div>
       </Layout>
     );
@@ -54,7 +64,9 @@ const mapStateToProps = ({ foods, categories }) => {
       isActive: categories.filter(cat => cat.isPinned)[0]._id === cat._id
     });
   });
-  return { foods, cats };
+  const foodList = foods ? foods.list : [];
+  const curCatId = foods ? foods.catId : "";
+  return { foods: foodList, curCatId: curCatId, cats };
 };
 const mapDispatchToProps = {
   handleFetchFood,

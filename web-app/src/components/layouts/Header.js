@@ -24,7 +24,7 @@ export class Header extends Component {
           <span className="nav-back pl-1"> Back to menu</span>
         </Col>
         {match.url !== "/checkout" ? (
-          <Col span={6} offset={12}>
+          <Col span={8} offset={10}>
             <ViewCardBtn totalItems={this.props.totalItems} />
           </Col>
         ) : null}

@@ -37,24 +37,25 @@ export class CardList extends Component {
       }
     }
   };
+
   render() {
     return (
       <div>
         <div className="header">
-          <Row type="flex" align="middle">
-            <Col span={18}>
+          <Row type="flex" align="stretch">
+            <Col span={16}>
               <FoodCategoryFilters
                 foodFilterList={this.state.tagFilters}
                 onSelect={this.onSelectFilter}
               />
             </Col>
-            <Col span={6}>
+            <Col span={8}>
               <ViewCardBtn />
             </Col>
           </Row>
         </div>
         <div className="content">
-          <h1 className="category">Pizza</h1>
+          <h1 className="category">{this.props.catName}</h1>
           <Row className="card-container">
             {this.state.listFood.map(food => (
               <FoodCard key={food._id} food={food} />
@@ -68,6 +69,7 @@ export class CardList extends Component {
 
 const getFilterList = foods => {
   const tagFilters = [];
+  console.log("Food in getFilterList", foods);
   foods.map(food => {
     food.tags.map(tag => {
       // find dupplicate one

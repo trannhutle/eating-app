@@ -3,13 +3,22 @@ import { Menu, Icon, Row } from "antd";
 import "./lists.scss";
 export const DEFAULT_FILTER_NONE = "-1";
 
-export const FoodCatMenu = ({ foodCatList, onSelect }) => {
+export const FoodCatMenu = ({ foodCatList, onSelect, onSelected }) => {
   const [catList, setCatList] = useState(foodCatList);
   useEffect(() => {
+    // Set new category
     if (catList.length === 0 && foodCatList.length > 0) {
       setCatList(foodCatList);
     }
-  }, [foodCatList]);
+    // Listen on changes to return the current selected category
+    if (catList.length > 0) {
+      const secCat = catList.reduce((reCat, curCat) => {
+        const active = curCat.isActive ? curCat : reCat;
+        return active;
+      }, null);
+      onSelected(secCat);
+    }
+  }, [foodCatList, catList]);
   return (
     <Menu
       onSelect={({ key }) => {
@@ -19,7 +28,11 @@ export const FoodCatMenu = ({ foodCatList, onSelect }) => {
             : Object.assign({}, cat, { isActive: !cat.isActive })
         );
         setCatList(updatedList);
-        onSelect(key);
+        const secCat = catList.reduce((reCat, curCat) => {
+          const active = curCat.isActive ? curCat : reCat;
+          return active;
+        }, null);
+        onSelect(secCat);
       }}
     >
       <Menu.Item key="1">
@@ -41,7 +54,7 @@ export const FoodCategoryFilters = ({ foodFilterList = [], onSelect }) => {
   const [curItem, setCurItem] = useState("-1");
 
   useEffect(() => {
-    if (filterList.length === 0 && foodFilterList.length > 0) {
+    if (filterList !== foodFilterList) {
       setCatList(foodFilterList);
     }
   }, [foodFilterList]);
