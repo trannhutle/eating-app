@@ -1,7 +1,8 @@
 import React from "react";
 import Draggable from "react-draggable";
+import { ResizableBox } from "react-resizable";
 
-import "./DraggableBoxes.scss";
+import "./Boxes.scss";
 
 export const DragBox = ({
   onDrag,
@@ -38,5 +39,31 @@ export const DragBox = ({
         </label>
       </div>
     </Draggable>
+  );
+};
+
+export const ResisableBox = ({
+  children,
+  minConstraints,
+  maxConstraints,
+  width,
+  height,
+  onStop,
+  isResisable
+}) => {
+  return (
+    <div>
+      <ResizableBox
+        className="resize-box"
+        minConstraints={minConstraints}
+        maxConstraints={maxConstraints}
+        width={width}
+        height={height}
+        onResizeStop={onStop}
+        axis={isResisable ? "both" : "none"}
+      >
+        {children}
+      </ResizableBox>
+    </div>
   );
 };

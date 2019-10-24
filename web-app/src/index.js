@@ -8,7 +8,7 @@ import { applyMiddleware } from "redux";
 import reducers from "./reducers";
 import "./styles/custom.scss";
 import "./styles/index.scss";
-
+import "react-resizable/css/styles.css";
 const store = createStore(reducers, applyMiddleware(thunk));
 ReactDOM.render(
   <Provider store={store}>
